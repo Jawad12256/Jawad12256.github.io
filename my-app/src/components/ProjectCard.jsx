@@ -1,6 +1,9 @@
-function ProjectCard({ project }) {
+function ProjectCard({ project, onClick }) {
     return (
-        <article className="project-card">
+        <article
+            className="project-card"
+            onClick={onClick}
+        >
 
             <div className="project-card__top">
 
@@ -19,7 +22,7 @@ function ProjectCard({ project }) {
             </h3>
 
             <p>
-                {project.description}
+                {project.shortDescription}
             </p>
 
             <div className="project-card__tags">

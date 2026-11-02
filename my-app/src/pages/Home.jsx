@@ -1,42 +1,47 @@
 import Section from '../components/Section';
 import ProjectCard from '../components/ProjectCard';
-
-import { projects } from '../data/portfolio';
+import IdentityMarquee from '../components/IdentityMarquee';
+import { profile, projects } from '../data';
 
 function Home() {
     return (
         <div id="top">
 
             {/* Hero */}
-            <section className="hero">
-                <div className="container">
+            <section className="hero" id="top">
 
-                    <p className="hero__eyebrow">
-                        DESIGN ENGINEER // BUILDER // PROBLEM SOLVER
-                    </p>
+                <div className="container hero__inner">
 
-                    <h1>
-                        Hi, I'm Jawad.
-                    </h1>
+                    <div className="hero__photo">
+                        <img
+                            src={profile.profilePhoto}
+                            alt={`${profile.name} professional portrait`}
+                        />
+                    </div>
 
-                    <p className="hero__description">
-                        I design, build and experiment across engineering,
-                        software, robotics and everything in between.
-                    </p>
+                    <div className="hero__content">
 
-                    <div className="hero__actions">
-                        <a href="#projects">
-                            View my work
-                        </a>
+                        <p className="hero__eyebrow">
+                            {profile.title}
+                        </p>
 
-                        <a href="#contact">
-                            Get in touch
-                        </a>
+                        <h1>
+                            {profile.greeting}
+                        </h1>
+
+                        <p className="hero__description">
+                            {profile.introduction}
+                        </p>
+
                     </div>
 
                 </div>
-            </section>
 
+                <IdentityMarquee
+                    items={profile.marqueeItems}
+                />
+
+            </section>
 
             {/* About */}
             <Section

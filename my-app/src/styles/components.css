@@ -195,6 +195,19 @@
     font-size: var(--text-xs);
 }
 
+/* ================================
+   Marquee
+   ================================ */
+
+.identity-marquee:hover .identity-marquee__track {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .identity-marquee__track {
+        animation: none;
+    }
+}
 
 /* ================================
    Mobile
