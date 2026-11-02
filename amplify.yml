@@ -1,0 +1,37 @@
+# AWS Amplify build specification (Spec 1 — build-and-deployment-baseline)
+#
+# This file lives at the REPOSITORY ROOT, which is where Amplify reads a
+# repo-stored build spec from. The application itself is nested one level
+# down in `my-app/`, so this uses the monorepo `applications` + `appRoot`
+# form to point Amplify at the subfolder.
+#
+# NOTE: This is configuration only. Adding this file does not create an
+# Amplify app or deploy anything; connecting the repo to Amplify Hosting
+# remains an explicit, owner-approved action. No AWS resources are created
+# or modified by committing this file.
+#
+# Amplify sets CI=true by default, so CRA (react-scripts) treats ESLint
+# warnings as errors. The source is kept warning-clean so `npm run build`
+# succeeds under CI=true. If a future, genuinely non-removable warning
+# ever appears, the deliberate (and commented) mitigation is to set
+# CI=false for the build command only — it should never be done silently.
+
+version: 1
+applications:
+  - appRoot: my-app
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        # Relative to appRoot (my-app), so this resolves to my-app/build.
+        baseDirectory: build
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*

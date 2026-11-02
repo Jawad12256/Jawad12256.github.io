@@ -33,8 +33,12 @@ have been reviewed.
 
 Keep tasks small enough to review and test independently.
 
+Once the task list has been presented, execute all tasks in one go
+without pausing between them, unless the owner, having reviewed the
+task list, explicitly asks to proceed task-by-task or to change scope.
+
 Do not implement unrelated improvements simply because they
-are noticed during another task.
+are noticed during another task. Note them for a future spec instead.
 
 ## 3. Human review
 
@@ -42,7 +46,10 @@ Pause for review:
 - After requirements have been generated.
 - After the technical design has been generated.
 - After the task list has been generated.
-- At meaningful implementation milestones.
+
+Implementation itself does not require pausing between tasks once the
+task list is approved (see section 2); report back after the batch of
+tasks is complete.
 
 Explain important architectural decisions and trade-offs.
 
@@ -74,12 +81,15 @@ Ask for missing factual information rather than guessing.
 
 ## 6. Git and deployment safety
 
-Do not:
-- Commit changes without permission.
-- Push changes without permission.
-- Deploy to GitHub Pages without permission.
-- Deploy to AWS Amplify without permission.
-- Delete AWS resources or alter billing-related settings.
+The owner has granted full autonomy over the `rework` branch:
+committing, pushing and opening pull requests may be done without
+per-action approval. Open PRs into the repository's default branch.
+
+The following still require explicit owner permission:
+- Deploying to GitHub Pages.
+- Deploying to AWS Amplify.
+- Creating, modifying, deleting or reconfiguring any AWS resource,
+  or altering billing-related settings.
 
 Keep GitHub Pages and AWS Amplify deployment configurations
 compatible throughout development.

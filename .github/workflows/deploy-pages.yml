@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+# Deployment baseline for the nested `my-app/` Create React App.
+#
+# IMPORTANT (per Spec 1 — build-and-deployment-baseline):
+# This workflow is configuration only. It is set to manual dispatch so
+# that NOTHING deploys automatically. An actual deployment happens only
+# when the repository owner explicitly runs this workflow (and then only
+# after the source has been merged to the intended branch). The `push`
+# trigger is intentionally left commented out until the owner approves
+# automatic deploys.
+
+on:
+  workflow_dispatch:
+  # Uncomment to enable automatic deploys once the owner approves:
+  # push:
+  #   branches:
+  #     - main
+
+# GitHub Pages deploy via the gh-pages branch (matches the existing
+# `gh-pages` tooling and `homepage` setting in my-app/package.json).
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    # All app steps run inside the nested app directory.
+    defaults:
+      run:
+        working-directory: my-app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: my-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        # CI defaults to true on GitHub Actions, so CRA treats warnings
+        # as errors here — matching the Amplify behaviour. The source is
+        # kept warning-clean so this passes.
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./my-app/build
+          publish_branch: gh-pages
