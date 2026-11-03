@@ -88,6 +88,19 @@
     margin-top: var(--space-8);
 }
 
+.hero__photo {
+    /* Constrain the portrait to ~half its previous rendered size,
+       kept proportional via the img rule below. */
+    flex: 0 0 auto;
+    max-width: 200px;
+}
+
+.hero__photo img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+}
+
 
 /* ================================
    Sections
@@ -198,6 +211,30 @@
 /* ================================
    Marquee
    ================================ */
+
+.identity-marquee {
+    overflow: hidden;
+}
+
+.identity-marquee__track {
+    display: flex;
+    width: max-content;
+    gap: var(--space-3);
+
+    animation: identity-scroll 30s linear infinite;
+}
+
+@keyframes identity-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        /* The track renders its items twice; -50% lands exactly on the
+           start of the second copy for a seamless loop. */
+        transform: translateX(-50%);
+    }
+}
 
 .identity-marquee:hover .identity-marquee__track {
     animation-play-state: paused;
