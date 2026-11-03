@@ -1,8 +1,18 @@
 function ProjectCard({ project, onClick }) {
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            onClick();
+        }
+    };
+
     return (
         <article
             className="project-card"
+            role="button"
+            tabIndex={0}
             onClick={onClick}
+            onKeyDown={handleKeyDown}
         >
 
             <div className="project-card__top">
