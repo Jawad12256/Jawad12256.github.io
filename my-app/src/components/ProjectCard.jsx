@@ -15,33 +15,51 @@ function ProjectCard({ project, onClick }) {
             onKeyDown={handleKeyDown}
         >
 
-            <div className="project-card__top">
+            {project.heroImage ? (
+                <img
+                    className="card__hero"
+                    src={project.heroImage.src}
+                    alt={project.heroImage.alt || project.title}
+                    loading="lazy"
+                />
+            ) : (
+                <div
+                    className="card__hero card__hero--empty"
+                    aria-hidden="true"
+                />
+            )}
 
-                <span className="project-card__category">
-                    {project.category}
-                </span>
+            <div className="project-card__body">
 
-                <span className="project-card__year">
-                    {project.year}
-                </span>
+                <div className="project-card__top">
 
-            </div>
-
-            <h3>
-                {project.title}
-            </h3>
-
-            <p>
-                {project.shortDescription}
-            </p>
-
-            <div className="project-card__tags">
-
-                {project.technologies.map((technology) => (
-                    <span key={technology}>
-                        {technology}
+                    <span className="project-card__category">
+                        {project.category}
                     </span>
-                ))}
+
+                    <span className="project-card__year">
+                        {project.year}
+                    </span>
+
+                </div>
+
+                <h3>
+                    {project.title}
+                </h3>
+
+                <p>
+                    {project.shortDescription}
+                </p>
+
+                <div className="project-card__tags">
+
+                    {project.technologies.map((technology) => (
+                        <span key={technology}>
+                            {technology}
+                        </span>
+                    ))}
+
+                </div>
 
             </div>
 

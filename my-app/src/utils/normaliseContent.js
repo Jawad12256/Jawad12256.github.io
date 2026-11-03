@@ -27,11 +27,34 @@ const asObject = (value) =>
 
 const joinMeta = (parts) => parts.filter(Boolean).join(' · ');
 
+// Video detection mirrors MediaItem's logic, so hero fallback never
+// picks a video source as a card thumbnail.
+const VIDEO_EXTENSIONS = ['.mp4', '.webm', '.ogg', '.mov', '.m4v'];
+const isVideoSrc = (src) =>
+    typeof src === 'string' &&
+    VIDEO_EXTENSIONS.some((ext) => src.toLowerCase().includes(ext));
+
+// Resolve a single hero image for a card:
+//   1. an explicit `record.heroImage` if provided, else
+//   2. the first non-video entry in `images`, else
+//   3. null (card renders a tasteful image-less state).
+// Never borrows an image from another record and never fabricates one.
+const resolveHeroImage = (record) => {
+    if (record.heroImage && record.heroImage.src) {
+        return record.heroImage;
+    }
+    const firstStill = asArray(record.images).find(
+        (img) => img && img.src && !isVideoSrc(img.src)
+    );
+    return firstStill || null;
+};
+
 export function normaliseProject(project) {
     return {
         id: project.id,
         type: 'project',
         title: project.title,
+        heroImage: resolveHeroImage(project),
         subtitle: joinMeta([project.type, project.year]),
         shortDescription: project.shortDescription || '',
         description: project.description || '',
@@ -54,6 +77,7 @@ export function normaliseExperience(experience) {
         id: experience.id,
         type: 'experience',
         title: experience.role,
+        heroImage: resolveHeroImage(experience),
         subtitle: joinMeta([
             experience.organisation,
             experience.period
@@ -82,6 +106,7 @@ export function normaliseAchievement(achievement) {
         id: achievement.id,
         type: 'achievement',
         title: achievement.title,
+        heroImage: resolveHeroImage(achievement),
         subtitle: joinMeta([
             achievement.category,
             achievement.year
@@ -107,6 +132,7 @@ export function normaliseEvent(event) {
         id: event.id,
         type: 'event',
         title: event.title,
+        heroImage: resolveHeroImage(event),
         subtitle: joinMeta([event.role, event.year]),
         shortDescription: event.shortDescription || '',
         description: event.description || '',
@@ -136,6 +162,7 @@ export function normaliseCredential(credential) {
         id: credential.id,
         type: 'credential',
         title: credential.title,
+        heroImage: resolveHeroImage(credential),
         subtitle: joinMeta([credential.issuer, credential.year]),
         shortDescription: credential.shortDescription || '',
         description: credential.description || '',

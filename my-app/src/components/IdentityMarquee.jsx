@@ -9,7 +9,15 @@ function IdentityMarquee({ items }) {
                         className="identity-card"
                         key={`${item}-${index}`}
                     >
-                        {item}
+                        <span className="identity-card__text">
+                            {item}
+                        </span>
+                        <span
+                            className="identity-card__divider"
+                            aria-hidden="true"
+                        >
+                            {'//'}
+                        </span>
                     </div>
                 ))}
             </div>

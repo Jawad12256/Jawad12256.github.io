@@ -35,6 +35,10 @@ function Home() {
             {/* Hero */}
             <section className="hero" id="top">
 
+                <IdentityMarquee
+                    items={profile.marqueeItems}
+                />
+
                 <div className="container hero__inner">
 
                     <div className="hero__photo">
@@ -61,10 +65,6 @@ function Home() {
                     </div>
 
                 </div>
-
-                <IdentityMarquee
-                    items={profile.marqueeItems}
-                />
 
             </section>
 

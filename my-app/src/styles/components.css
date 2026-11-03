@@ -51,12 +51,22 @@
    ================================ */
 
 .hero {
-    min-height: calc(100vh - var(--nav-height));
+    /* Children stack in normal flow: the full-width marquee banner on
+       top, then the centered .container content column. (Previously a
+       centering flexbox, which disrupted .container margins.) */
+    padding-bottom: var(--space-12);
+}
 
+.hero__inner {
     display: flex;
     align-items: center;
+    gap: var(--space-10);
 
-    padding-block: var(--space-12);
+    padding-top: var(--space-12);
+}
+
+.hero__content {
+    flex: 1 1 auto;
 }
 
 .hero__eyebrow,
@@ -128,21 +138,40 @@
     max-width: none;
 
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-4);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
 }
 
 .project-card {
-    padding: var(--space-6);
-
     background: var(--bg-raised);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
+
+    overflow: hidden;
 
     transition:
         background 150ms ease,
         border-color 150ms ease,
         transform 150ms ease;
+}
+
+/* Card hero image (project cards and generic cards) */
+.card__hero {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+
+    display: block;
+    border-bottom: 1px solid var(--border);
+}
+
+.card__hero--empty {
+    background: var(--bg-sunken);
+}
+
+/* Project-card content is padded; the hero image sits flush to edges */
+.project-card__body {
+    padding: var(--space-6);
 }
 
 .project-card:hover {
@@ -214,14 +243,36 @@
 
 .identity-marquee {
     overflow: hidden;
+    width: 100%;
+
+    background: var(--bg-sunken);
+    border-block: 1px solid var(--border);
+    padding-block: var(--space-3);
 }
 
 .identity-marquee__track {
     display: flex;
     width: max-content;
-    gap: var(--space-3);
 
     animation: identity-scroll 30s linear infinite;
+}
+
+.identity-card {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding-inline: var(--space-3);
+
+    white-space: nowrap;
+
+    color: var(--text-body);
+    font-size: var(--text-sm);
+}
+
+.identity-card__divider {
+    color: var(--accent);
+    font-weight: 600;
+    user-select: none;
 }
 
 @keyframes identity-scroll {
@@ -250,18 +301,33 @@
    Mobile
    ================================ */
 
+@media (max-width: 1000px) {
+
+    .project-grid,
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
 @media (max-width: 700px) {
 
     .navbar__links {
         display: none;
     }
 
-    .project-grid {
+    .project-grid,
+    .card-grid {
         grid-template-columns: 1fr;
     }
 
     .hero h1 {
         font-size: var(--text-2xl);
+    }
+
+    .hero__inner {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
 }
@@ -274,23 +340,26 @@
     max-width: none;
 
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-4);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
 }
 
 .card {
-    padding: var(--space-6);
-
     background: var(--bg-raised);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
 
+    overflow: hidden;
     cursor: pointer;
 
     transition:
         background 150ms ease,
         border-color 150ms ease,
         transform 150ms ease;
+}
+
+.card__body {
+    padding: var(--space-6);
 }
 
 .card:hover,

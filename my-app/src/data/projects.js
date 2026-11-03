@@ -50,6 +50,10 @@ export const projects = [
         year: '2026',
         type: 'Personal Project',
         featured: true,
+        heroImage: {
+            src: cfdHero,
+            alt: 'CFD simulation'
+        },
         shortDescription:
             'With the power of Python, I built a computational fluid dynamics solver, exploring numerical solutions to the Navier-Stokes equations.',
         description:
@@ -96,6 +100,10 @@ export const projects = [
         year: '2025',
         type: 'A-Level Project',
         featured: true,
+        heroImage: {
+            src: guidesign,
+            alt: 'MorseMaster GUI design'
+        },
         shortDescription:
             'A Python-based tool for encoding/decoding Morse Code in text/sound forms, and under the hood: DSP, GUI design with tkinter, and multithreading concurrency.',
         description:
@@ -188,6 +196,10 @@ export const projects = [
         year: '2026',
         type: 'University Project',
         featured: true,
+        heroImage: {
+            src: megabiteHero,
+            alt: 'MegaBite'
+        },
         shortDescription:
             'A gesture-controlled, hands-free robotic cooking assistant, developed in response to months of research into student challenges with food on campus.',
         description:
@@ -257,6 +269,10 @@ export const projects = [
         year: '2026',
         type: 'University Project',
         featured: true,
+        heroImage: {
+            src: electronicsHero,
+            alt: 'Electronics 1 RC Car'
+        },
         shortDescription:
             'RC Car built with an ESP32 microcontroller, 3D printed chassis, and standard electronics components available in the lab.',
         description:
@@ -308,6 +324,10 @@ export const projects = [
         year: '2026',
         type: 'University Project',
         featured: true,
+        heroImage: {
+            src: dataHero,
+            alt: 'Data Science Project'
+        },
         shortDescription:
             'Data Science group project investigating what factors best predict university success in the QS World University Rankings 2025.',
         description:
@@ -361,6 +381,10 @@ export const projects = [
         year: '2026',
         type: 'Personal Project',
         featured: true,
+        heroImage: {
+            src: printingHero,
+            alt: '3D-Printed phone stand'
+        },
         shortDescription:
             'A series of models and products I\'ve CAD-modelled, sliced, and 3D-printed in my learning process.',
         description:
@@ -428,6 +452,10 @@ export const projects = [
         year: '2025',
         type: 'Personal Project',
         featured: false,
+        heroImage: {
+            src: minecraftHero,
+            alt: 'Minecraft recreation of St Olave\'s Grammar School'
+        },
         shortDescription:
             'Recreating my school in Minecraft, block by block, using reference images and measurements to ensure accuracy.',
         description:
@@ -502,6 +530,10 @@ export const projects = [
         year: '2026',
         type: 'Personal Project',
         featured: false,
+        heroImage: {
+            src: splatoonHero,
+            alt: 'Splatoon 3 Hero Image'
+        },
         shortDescription:
             'Competitive Splatoon 3 player, participating in tournaments, with a focus on teamwork, strategy, and communication.',
         description:
