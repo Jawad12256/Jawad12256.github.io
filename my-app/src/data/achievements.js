@@ -21,6 +21,11 @@ export const achievements = [
         award: 'National 1st Place',
         recognition: 'Quality of Visual Communication Award',
 
+        heroImage: {
+            src: uksdcHero,
+            alt: 'UK Space Design Competition project'
+        },
+
         shortDescription:
             'National-winning space settlement design competition, involving the design of a sustainable lunar settlement and its supporting infrastructure.',
 
@@ -71,6 +76,11 @@ export const achievements = [
         year: '2024',
 
         award: 'Regional 1st Place',
+
+        heroImage: {
+            src: f1isHero,
+            alt: 'F1 in Schools miniature race car'
+        },
 
         shortDescription:
             'Competitive engineering project involving the design, analysis and manufacture of an F1-inspired miniature race car.',

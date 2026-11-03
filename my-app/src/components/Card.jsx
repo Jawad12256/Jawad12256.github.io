@@ -18,15 +18,31 @@ function Card({ item, onClick }) {
             onClick={onClick}
             onKeyDown={handleKeyDown}
         >
-            {item.subtitle && (
-                <span className="card__meta">{item.subtitle}</span>
+            {item.heroImage ? (
+                <img
+                    className="card__hero"
+                    src={item.heroImage.src}
+                    alt={item.heroImage.alt || item.title}
+                    loading="lazy"
+                />
+            ) : (
+                <div
+                    className="card__hero card__hero--empty"
+                    aria-hidden="true"
+                />
             )}
 
-            <h3 className="card__title">{item.title}</h3>
+            <div className="card__body">
+                {item.subtitle && (
+                    <span className="card__meta">{item.subtitle}</span>
+                )}
 
-            {item.shortDescription && (
-                <p className="card__desc">{item.shortDescription}</p>
-            )}
+                <h3 className="card__title">{item.title}</h3>
+
+                {item.shortDescription && (
+                    <p className="card__desc">{item.shortDescription}</p>
+                )}
+            </div>
         </article>
     );
 }
