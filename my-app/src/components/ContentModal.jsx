@@ -9,6 +9,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import MediaItem from './MediaItem';
+import Paragraphs from './Paragraphs';
 
 // Human-friendly labels for known link keys; unknown keys fall back to
 // the key itself (prettified).
@@ -103,9 +104,10 @@ function SubItem({ item }) {
     return (
         <div className="modal__subitem">
             <h4 className="modal__subitem-title">{item.title}</h4>
-            {item.description && (
-                <p className="modal__subitem-desc">{item.description}</p>
-            )}
+            <Paragraphs
+                text={item.description}
+                className="modal__subitem-desc"
+            />
             <Chips label="Technologies" items={item.technologies} />
             <Chips label="Skills" items={item.skills} />
             {item.images.length > 0 && (
@@ -230,11 +232,10 @@ function ContentModal({ item, onClose }) {
                 <div className="modal__body">
                     <MetaLines item={item} />
 
-                    {item.description && (
-                        <p className="modal__description">
-                            {item.description}
-                        </p>
-                    )}
+                    <Paragraphs
+                        text={item.description}
+                        className="modal__description"
+                    />
 
                     <Chips label="Technologies" items={item.technologies} />
                     <Chips label="Skills" items={item.skills} />

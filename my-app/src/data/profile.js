@@ -15,9 +15,19 @@ export const profile = {
 
     profilePhoto,
 
-    introduction:
-        `I'm a ${age}-year-old design engineer who loves to build cool stuff, learn cool stuff, and teach cool stuff. I have experience in CAD, programming, systems design, and visual communication, and I enjoy collaborating with teams to bring ideas to life.
-        I love to wear many hats, apply my skills to new contexts, and grow while lifting others around me the best I can!`,
+    introduction: [
+        `I'm a ${age}-year-old design engineer who loves to build cool stuff, learn cool stuff, and teach cool stuff.`,
+        'I have experience in CAD, programming, systems design, and visual communication, and I enjoy collaborating with teams to bring ideas to life.',
+        'I love to wear many hats, apply my skills to new contexts, and grow while lifting others around me the best I can!'
+    ],
+
+    about: [
+        'I\'m a Design Engineering student at Imperial College London with an interest in building things that sit between engineering, software and design.'
+    ],
+
+    contact: [
+        'I\'m always interested in interesting projects, collaborations and opportunities.'
+    ],
 
     marqueeItems: [
         'Design Engineer',
