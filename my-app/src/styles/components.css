@@ -99,16 +99,29 @@
 }
 
 .hero__photo {
-    /* Constrain the portrait to ~half its previous rendered size,
-       kept proportional via the img rule below. */
+    /* ~25% larger than the previous 200px cap, kept proportional via
+       the img rule below. */
     flex: 0 0 auto;
-    max-width: 200px;
+    max-width: 250px;
 }
 
 .hero__photo img {
     width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
+}
+
+/* ================================
+   Paragraph spacing (visible gaps between paragraphs)
+   Applies only BETWEEN adjacent paragraphs, so single-paragraph
+   blocks gain no trailing gap.
+   ================================ */
+
+.hero__description + .hero__description,
+.section__content p + p,
+.modal__description + .modal__description,
+.modal__subitem-desc + .modal__subitem-desc {
+    margin-top: var(--space-5);
 }
 
 
@@ -126,9 +139,15 @@
 }
 
 .section__content {
-    /* Wider than the old 800px cap so prose flows further right, while
-       keeping a readable maximum line length. */
-    max-width: 72ch;
+    /* Fill the container column so content isn't left-locked with a
+       large right-side gap. Long prose keeps a generous readable cap
+       (~90ch) applied to its paragraphs; grids/cards fill fully. */
+    max-width: 100%;
+}
+
+/* Keep a readable measure for long-form prose paragraphs specifically */
+.section__content p {
+    max-width: 90ch;
 }
 
 
@@ -140,7 +159,7 @@
     max-width: none;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-5);
 }
 
@@ -303,16 +322,7 @@
    Mobile
    ================================ */
 
-@media (max-width: 1000px) {
-
-    .project-grid,
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-@media (max-width: 700px) {
+@media (max-width: 760px) {
 
     .navbar__links {
         display: none;
@@ -342,7 +352,7 @@
     max-width: none;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-5);
 }
 
@@ -424,13 +434,68 @@
 .modal {
     position: relative;
 
-    width: min(100%, 760px);
+    max-height: 85vh;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;              /* panes scroll, not the frame */
 
     background: var(--bg-raised);
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-lg);
+}
 
-    padding: var(--space-10) var(--space-8) var(--space-8);
+/* Wider when a media pane is present; narrower for text-only records */
+.modal--split {
+    width: min(100%, 1100px);
+}
+
+.modal--single {
+    width: min(100%, 760px);
+}
+
+.modal__layout {
+    display: flex;
+    gap: var(--space-8);
+
+    flex: 1 1 auto;
+    min-height: 0;                 /* lets panes shrink and scroll */
+}
+
+.modal__main,
+.modal__media {
+    overflow-y: auto;
+    min-height: 0;
+
+    padding: var(--space-10) var(--space-6) var(--space-8);
+}
+
+.modal__main {
+    flex: 1.2 1 0;
+}
+
+.modal__media {
+    flex: 1 1 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+
+    border-left: 1px solid var(--border);
+    background: var(--bg-sunken);
+}
+
+/* When single-column (no media), the main pane fills the frame */
+.modal--single .modal__main {
+    flex: 1 1 auto;
+}
+
+.modal__media-group-title {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-1);
+
+    color: var(--accent);
+    font-size: var(--text-sm);
 }
 
 .modal__close {
@@ -506,8 +571,12 @@
 }
 
 .modal__description {
-    margin-bottom: var(--space-6);
     color: var(--text-body);
+}
+
+/* Space after the last description paragraph, before chips/sub-items */
+.modal__description:last-of-type {
+    margin-bottom: var(--space-6);
 }
 
 .modal__chips-group {
@@ -670,14 +739,40 @@
 
 }
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
 
     .card-grid {
         grid-template-columns: 1fr;
     }
 
+}
+
+/* Narrow viewport: stack the modal into one scrollable column */
+@media (max-width: 860px) {
+
+    .modal--split,
+    .modal--single {
+        width: min(100%, 560px);
+    }
+
     .modal {
-        padding: var(--space-8) var(--space-5) var(--space-6);
+        max-height: 90vh;
+    }
+
+    .modal__layout {
+        flex-direction: column;
+        overflow-y: auto;          /* single scroll area when stacked */
+        gap: 0;
+    }
+
+    .modal__main,
+    .modal__media {
+        overflow-y: visible;       /* panes no longer scroll separately */
+    }
+
+    .modal__media {
+        border-left: none;
+        border-top: 1px solid var(--border);
     }
 
 }

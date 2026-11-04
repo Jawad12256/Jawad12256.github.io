@@ -100,6 +100,8 @@ function MetaLines({ item }) {
     );
 }
 
+// Sub-project detail is TEXT ONLY on the left; its media is aggregated
+// into the right media pane (see MediaPane).
 function SubItem({ item }) {
     return (
         <div className="modal__subitem">
@@ -110,15 +112,40 @@ function SubItem({ item }) {
             />
             <Chips label="Technologies" items={item.technologies} />
             <Chips label="Skills" items={item.skills} />
-            {item.images.length > 0 && (
-                <div className="modal__media-grid">
-                    {item.images.map((image, index) => (
-                        <MediaItem key={index} image={image} />
-                    ))}
-                </div>
-            )}
             <LinksList links={item.links} />
         </div>
+    );
+}
+
+// Right-hand media pane: the main record's media, followed by each
+// sub-project's media grouped under its own heading so it is clear
+// which project each image belongs to.
+function MediaPane({ item }) {
+    const mainImages = item.images || [];
+    const subGroups = (item.subItems || []).filter(
+        (sub) => sub.images && sub.images.length > 0
+    );
+
+    return (
+        <>
+            {mainImages.map((image, index) => (
+                <MediaItem key={`main-${index}`} image={image} />
+            ))}
+
+            {subGroups.map((sub) => (
+                <div className="modal__media-group" key={sub.id}>
+                    <h4 className="modal__media-group-title">
+                        {sub.title}
+                    </h4>
+                    {sub.images.map((image, index) => (
+                        <MediaItem
+                            key={`${sub.id}-${index}`}
+                            image={image}
+                        />
+                    ))}
+                </div>
+            ))}
+        </>
     );
 }
 
@@ -194,8 +221,14 @@ function ContentModal({ item, onClose }) {
     }
 
     const titleId = `modal-title-${item.id}`;
-    const hasImages = item.images && item.images.length > 0;
     const hasSubItems = item.subItems && item.subItems.length > 0;
+
+    // Media exists if the main record has images OR any sub-project does.
+    const hasMedia =
+        (item.images && item.images.length > 0) ||
+        (item.subItems || []).some(
+            (sub) => sub.images && sub.images.length > 0
+        );
 
     return createPortal(
         <div
@@ -203,7 +236,11 @@ function ContentModal({ item, onClose }) {
             onClick={onClose}
         >
             <div
-                className="modal"
+                className={
+                    hasMedia
+                        ? 'modal modal--split'
+                        : 'modal modal--single'
+                }
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby={titleId}
@@ -220,46 +257,55 @@ function ContentModal({ item, onClose }) {
                     ×
                 </button>
 
-                <header className="modal__header">
-                    {item.subtitle && (
-                        <p className="modal__eyebrow">{item.subtitle}</p>
-                    )}
-                    <h2 id={titleId} className="modal__title">
-                        {item.title}
-                    </h2>
-                </header>
+                <div className="modal__layout">
 
-                <div className="modal__body">
-                    <MetaLines item={item} />
+                    {/* LEFT: all textual content */}
+                    <div className="modal__main">
+                        <header className="modal__header">
+                            {item.subtitle && (
+                                <p className="modal__eyebrow">
+                                    {item.subtitle}
+                                </p>
+                            )}
+                            <h2 id={titleId} className="modal__title">
+                                {item.title}
+                            </h2>
+                        </header>
 
-                    <Paragraphs
-                        text={item.description}
-                        className="modal__description"
-                    />
+                        <MetaLines item={item} />
 
-                    <Chips label="Technologies" items={item.technologies} />
-                    <Chips label="Skills" items={item.skills} />
+                        <Paragraphs
+                            text={item.description}
+                            className="modal__description"
+                        />
 
-                    {hasImages && (
-                        <div className="modal__media-grid">
-                            {item.images.map((image, index) => (
-                                <MediaItem key={index} image={image} />
-                            ))}
+                        <Chips
+                            label="Technologies"
+                            items={item.technologies}
+                        />
+                        <Chips label="Skills" items={item.skills} />
+
+                        {hasSubItems && (
+                            <section className="modal__subitems">
+                                <h3 className="modal__subitems-title">
+                                    Projects within this role
+                                </h3>
+                                {item.subItems.map((sub) => (
+                                    <SubItem key={sub.id} item={sub} />
+                                ))}
+                            </section>
+                        )}
+
+                        <LinksList links={item.links} />
+                    </div>
+
+                    {/* RIGHT: all media (main + sub-project groups) */}
+                    {hasMedia && (
+                        <div className="modal__media">
+                            <MediaPane item={item} />
                         </div>
                     )}
 
-                    {hasSubItems && (
-                        <section className="modal__subitems">
-                            <h3 className="modal__subitems-title">
-                                Projects within this role
-                            </h3>
-                            {item.subItems.map((sub) => (
-                                <SubItem key={sub.id} item={sub} />
-                            ))}
-                        </section>
-                    )}
-
-                    <LinksList links={item.links} />
                 </div>
             </div>
         </div>,
