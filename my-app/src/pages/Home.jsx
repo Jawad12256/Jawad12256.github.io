@@ -6,6 +6,7 @@ import Card from '../components/Card';
 import IdentityMarquee from '../components/IdentityMarquee';
 import ContentModal from '../components/ContentModal';
 import Paragraphs from '../components/Paragraphs';
+import LinkButton from '../components/LinkButton';
 
 import {
     profile,
@@ -70,20 +71,10 @@ function Home() {
 
             </section>
 
-            {/* About */}
-            <Section
-                id="about"
-                eyebrow="01 // ABOUT"
-                title="A multidisciplinary engineer."
-            >
-                <Paragraphs text={profile.about} />
-            </Section>
-
-
             {/* Projects */}
             <Section
                 id="projects"
-                eyebrow="02 // PROJECTS"
+                eyebrow="01 // PROJECTS"
                 title="Things I've built."
             >
                 <div className="project-grid">
@@ -105,7 +96,7 @@ function Home() {
             {/* Experience */}
             <Section
                 id="experience"
-                eyebrow="03 // EXPERIENCE"
+                eyebrow="02 // EXPERIENCE"
                 title="Where I've worked."
             >
                 <div className="card-grid">
@@ -125,7 +116,7 @@ function Home() {
             {/* Credentials */}
             <Section
                 id="credentials"
-                eyebrow="04 // CREDENTIALS"
+                eyebrow="03 // CREDENTIALS"
                 title="Certifications and qualifications."
             >
                 <div className="card-grid">
@@ -145,7 +136,7 @@ function Home() {
             {/* Achievements */}
             <Section
                 id="achievements"
-                eyebrow="05 // ACHIEVEMENTS"
+                eyebrow="04 // ACHIEVEMENTS"
                 title="Competitions and awards."
             >
                 <div className="card-grid">
@@ -165,7 +156,7 @@ function Home() {
             {/* Events */}
             <Section
                 id="events"
-                eyebrow="06 // EVENTS"
+                eyebrow="05 // EVENTS"
                 title="Things I've organised."
             >
                 <div className="card-grid">
@@ -185,41 +176,31 @@ function Home() {
             {/* Contact */}
             <Section
                 id="contact"
-                eyebrow="07 // CONTACT"
+                eyebrow="06 // CONTACT"
                 title="Let's build something."
             >
                 <Paragraphs text={profile.contact} />
 
                 <div className="contact-links">
                     {profile.links.github && (
-                        <a
-                            className="contact-link"
+                        <LinkButton
+                            linkKey="github"
                             href={profile.links.github}
-                            target="_blank"
-                            rel="noreferrer noopener"
-                        >
-                            GitHub
-                        </a>
+                        />
                     )}
 
                     {profile.links.linkedin && (
-                        <a
-                            className="contact-link"
+                        <LinkButton
+                            linkKey="linkedin"
                             href={profile.links.linkedin}
-                            target="_blank"
-                            rel="noreferrer noopener"
-                        >
-                            LinkedIn
-                        </a>
+                        />
                     )}
 
                     {profile.links.email && (
-                        <a
-                            className="contact-link"
-                            href={`mailto:${profile.links.email}`}
-                        >
-                            Email
-                        </a>
+                        <LinkButton
+                            linkKey="email"
+                            href={profile.links.email}
+                        />
                     )}
                 </div>
             </Section>

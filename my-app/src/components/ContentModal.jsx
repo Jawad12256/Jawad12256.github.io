@@ -10,23 +10,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import MediaItem from './MediaItem';
 import Paragraphs from './Paragraphs';
-
-// Human-friendly labels for known link keys; unknown keys fall back to
-// the key itself (prettified).
-const LINK_LABELS = {
-    github: 'GitHub',
-    makerworld: 'MakerWorld',
-    article: 'Read article',
-    credential: 'Verify credential',
-    linkedin: 'LinkedIn',
-    linkedinTrivyal: 'LinkedIn: Trivyal',
-    linkedinCyphon: 'LinkedIn: Cyphon'
-};
-
-const prettifyKey = (key) =>
-    key
-        .replace(/([a-z])([A-Z])/g, '$1 $2')
-        .replace(/^./, (c) => c.toUpperCase());
+import LinkButton from './LinkButton';
 
 function Chips({ label, items }) {
     if (!items || items.length === 0) {
@@ -56,15 +40,7 @@ function LinksList({ links }) {
     return (
         <div className="modal__links">
             {entries.map(([key, url]) => (
-                <a
-                    key={key}
-                    className="modal__link"
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                >
-                    {LINK_LABELS[key] || prettifyKey(key)}
-                </a>
+                <LinkButton key={key} linkKey={key} href={url} />
             ))}
         </div>
     );
