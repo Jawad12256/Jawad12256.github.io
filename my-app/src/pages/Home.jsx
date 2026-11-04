@@ -5,6 +5,7 @@ import ProjectCard from '../components/ProjectCard';
 import Card from '../components/Card';
 import IdentityMarquee from '../components/IdentityMarquee';
 import ContentModal from '../components/ContentModal';
+import Paragraphs from '../components/Paragraphs';
 
 import {
     profile,
@@ -58,9 +59,10 @@ function Home() {
                             {profile.greeting}
                         </h1>
 
-                        <p className="hero__description">
-                            {profile.introduction}
-                        </p>
+                        <Paragraphs
+                            text={profile.introduction}
+                            className="hero__description"
+                        />
 
                     </div>
 
@@ -74,11 +76,7 @@ function Home() {
                 eyebrow="01 // ABOUT"
                 title="A multidisciplinary engineer."
             >
-                <p>
-                    I'm a Design Engineering student at Imperial College
-                    London with an interest in building things that sit
-                    between engineering, software and design.
-                </p>
+                <Paragraphs text={profile.about} />
             </Section>
 
 
@@ -190,10 +188,40 @@ function Home() {
                 eyebrow="07 // CONTACT"
                 title="Let's build something."
             >
-                <p>
-                    I'm always interested in interesting projects,
-                    collaborations and opportunities.
-                </p>
+                <Paragraphs text={profile.contact} />
+
+                <div className="contact-links">
+                    {profile.links.github && (
+                        <a
+                            className="contact-link"
+                            href={profile.links.github}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                        >
+                            GitHub
+                        </a>
+                    )}
+
+                    {profile.links.linkedin && (
+                        <a
+                            className="contact-link"
+                            href={profile.links.linkedin}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                        >
+                            LinkedIn
+                        </a>
+                    )}
+
+                    {profile.links.email && (
+                        <a
+                            className="contact-link"
+                            href={`mailto:${profile.links.email}`}
+                        >
+                            Email
+                        </a>
+                    )}
+                </div>
             </Section>
 
             <ContentModal item={activeItem} onClose={closeModal} />

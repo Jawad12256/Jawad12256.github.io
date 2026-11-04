@@ -81,11 +81,11 @@
 .hero h1 {
     margin-bottom: var(--space-6);
 
-    max-width: 800px;
+    max-width: 960px;
 }
 
 .hero__description {
-    max-width: 650px;
+    max-width: 72ch;
 
     color: var(--text-body);
     font-size: var(--text-lg);
@@ -126,7 +126,9 @@
 }
 
 .section__content {
-    max-width: 800px;
+    /* Wider than the old 800px cap so prose flows further right, while
+       keeping a readable maximum line length. */
+    max-width: 72ch;
 }
 
 
@@ -621,6 +623,41 @@
 
 .modal__link:hover {
     background: var(--accent-hover);
+}
+
+/* ================================
+   Contact links
+   ================================ */
+
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+
+    margin-top: var(--space-6);
+}
+
+.contact-link {
+    padding: var(--space-2) var(--space-5);
+
+    color: var(--text-on-accent);
+    background: var(--accent);
+    border-radius: var(--radius-sm);
+
+    font-size: var(--text-sm);
+    font-weight: 600;
+
+    transition: background 150ms ease;
+}
+
+.contact-link:hover {
+    background: var(--accent-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-link {
+        transition: none;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

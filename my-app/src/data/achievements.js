@@ -30,7 +30,7 @@ export const achievements = [
             'National-winning space settlement design competition, involving the design of a sustainable lunar settlement and its supporting infrastructure.',
 
         description:
-            'The UKSDC National Finals 2024 challenged me to work with a team of around 50 students I had never met before to design Arial, a lunar settlement. I proposed the design of autonomous construction and maintenance robots, including an innovative modular approach that enabled old, decommissioned hardware to be reused within a circular economy. For example, rather than allowing surplus ultrasonic stir welding robots to become redundant, their components could be repurposed for other construction requirements. I also explored the commercial potential for Arial to manufacture magnetoplasmadynamic (MPD) thrusters using lunar titanium reserves, reducing reliance on transporting materials from Earth. Our design secured National 1st Place, and I personally received the Quality of Visual Communication Award for my CAD and visualisation work.',
+            'The UKSDC National Finals 2024 challenged me to work with a team of around 50 students I had never met before to design Arial, a lunar settlement. I proposed the design of autonomous construction and maintenance robots, including an innovative modular approach that enabled old, decommissioned hardware to be reused within a circular economy. For example, rather than allowing surplus ultrasonic stir welding robots to become redundant, their components could be repurposed for other construction requirements.\n\nI also explored the commercial potential for Arial to manufacture magnetoplasmadynamic (MPD) thrusters using lunar titanium reserves, reducing reliance on transporting materials from Earth. Our design secured National 1st Place, and I personally received the Quality of Visual Communication Award for my CAD and visualisation work.',
 
         skills: [
             'Systems Design',
@@ -86,7 +86,7 @@ export const achievements = [
             'Competitive engineering project involving the design, analysis and manufacture of an F1-inspired miniature race car.',
 
         description:
-            'As Manufacturing Manager for my team, I was primarily responsible for CNC routing, high-quality finishing and component assembly. I also contributed to the iterative aerodynamic design process, using CFD analysis in Ansys Fluent to evaluate the car and its aerofoil. Our team developed a deep-learning algorithm interfacing with Ansys to optimise the aerofoil geometry, aiming to reduce drag while increasing downforce. Alongside the technical work, we produced marketing material and secured sponsorships to support our competition entry. Our efforts culminated in a Regional 1st Place finish.',
+            'As Manufacturing Manager for my team, I was primarily responsible for CNC routing, high-quality finishing and component assembly. I also contributed to the iterative aerodynamic design process, using CFD analysis in Ansys Fluent to evaluate the car and its aerofoil. Our team developed a deep-learning algorithm interfacing with Ansys to optimise the aerofoil geometry, aiming to reduce drag while increasing downforce.\n\nAlongside the technical work, we produced marketing material and secured sponsorships to support our competition entry. Our efforts culminated in a Regional 1st Place finish.',
 
         skills: [
             'CAD',
@@ -147,7 +147,7 @@ export const achievements = [
             'Autonomous robotics competition involving the design, programming and manufacture of a two-wheel-drive robot.',
 
         description:
-            'Working alongside my school robotics team, we designed, programmed and manufactured an autonomous two-wheel-drive robot to compete in the arena. The robot was tasked with identifying and stacking AprilTag-labelled boxes in designated zones. A months-long iterative design process led us to use two servo-controlled lifting and clamping arms. One challenge was preventing boxes from slipping out of the gripper, which we addressed by adding kitchen sponges to the arms to increase friction. On the software side, I introduced an agile development approach to help the team develop control, sensing, navigation and strategy code in parallel. Our robot, Girafferey, competed in a series of 1v1v1v1 matches and reached the quarter-finals.',
+            'Working alongside my school robotics team, we designed, programmed and manufactured an autonomous two-wheel-drive robot to compete in the arena. The robot was tasked with identifying and stacking AprilTag-labelled boxes in designated zones. A months-long iterative design process led us to use two servo-controlled lifting and clamping arms. One challenge was preventing boxes from slipping out of the gripper, which we addressed by adding kitchen sponges to the arms to increase friction.\n\nOn the software side, I introduced an agile development approach to help the team develop control, sensing, navigation and strategy code in parallel. Our robot, Girafferey, competed in a series of 1v1v1v1 matches and reached the quarter-finals.',
 
         skills: [
             'Robotics',
