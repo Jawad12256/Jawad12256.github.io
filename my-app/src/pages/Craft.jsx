@@ -200,9 +200,7 @@ function Craft() {
                     <p className="craft__intro">
                         Design Engineering is about combining disciplines
                         to build something new. Drag or double-click
-                        ingredients into the grid — order doesn't matter.
-                        When they form a recipe, the crafted item appears
-                        in the result box.
+                        ingredients into the grid (order doesn't matter).
                     </p>
 
                     <button

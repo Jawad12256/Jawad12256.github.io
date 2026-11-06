@@ -19,9 +19,7 @@ function MasterCrafterCelebration({ onClose }) {
                 </p>
                 <p className="master-crafter__text">
                     You discovered every recipe and crafted the full
-                    breadth of my Design Engineering work. Nicely done —
-                    that's exactly the spirit of combining disciplines to
-                    build something new.
+                    breadth of my Design Engineering work. Keep combining, and you'll be a design engineer just like me!
                 </p>
                 <button
                     type="button"

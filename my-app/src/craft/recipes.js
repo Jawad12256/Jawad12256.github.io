@@ -27,7 +27,7 @@ export const recipes = [
     },
     {
         id: 'r-datascience',
-        ingredients: ['code', 'blueprint'],
+        ingredients: ['blueprint', 'code'],
         result: 'data-science',
         required: true,
         hint: 'Finding patterns from structured data.'
@@ -46,39 +46,32 @@ export const recipes = [
         required: true,
         hint: 'Building something real inside a game.'
     },
-    {
-        id: 'r-splatoon',
-        ingredients: ['controller', 'wheels'],
-        result: 'splatoon',
-        required: true,
-        hint: 'Teamwork and reflexes in competitive play.'
-    },
 
     // --- 3-ingredient (advanced) ---
     {
         id: 'r-internship',
-        ingredients: ['code', 'wires', 'blueprint'],
+        ingredients: ['blueprint', 'code', 'wires'],
         result: 'software-internship',
         required: true,
         hint: 'Professional software built across a summer.'
     },
     {
         id: 'r-rccar',
-        ingredients: ['wires', 'wheels', 'controller'],
+        ingredients: ['controller', 'wheels', 'wires'],
         result: 'electronics-1-rc-car',
         required: true,
         hint: 'A remote-controlled machine on wheels.'
     },
     {
         id: 'r-megabite',
-        ingredients: ['code', 'wires', 'cad'],
+        ingredients: ['cad', 'code', 'wires'],
         result: 'megabite',
         required: true,
         hint: 'A hands-free assistant blending software and hardware.'
     },
     {
         id: 'r-srobo',
-        ingredients: ['wires', 'cad', 'controller'],
+        ingredients: ['cad', 'code', 'wheels'],
         result: 'student-robotics',
         required: true,
         hint: 'An autonomous robot built to compete.'
@@ -87,18 +80,25 @@ export const recipes = [
     // --- 4-ingredient (most advanced) ---
     {
         id: 'r-f1is',
-        ingredients: ['cad', 'simulation', 'wheels', 'blueprint'],
+        ingredients: ['blueprint', 'cad', 'simulation', 'wheels'],
         result: 'f1-in-schools',
         required: true,
         hint: 'A tiny race car: designed, analysed and manufactured.'
     },
     {
         id: 'r-uksdc',
-        ingredients: ['cad', 'simulation', 'blueprint', 'wires'],
+        ingredients: ['blueprint', 'cad', 'simulation', 'printer'],
         result: 'uk-space-design',
         required: true,
         hint: 'Designing a settlement beyond Earth.'
-    }
+    },
+        {
+        id: 'r-splatoon',
+        ingredients: ['controller', 'controller', 'controller', 'controller'],
+        result: 'splatoon',
+        required: true,
+        hint: 'Teamwork and reflexes in competitive play.'
+    },
 ];
 
 export const requiredRecipeIds = recipes

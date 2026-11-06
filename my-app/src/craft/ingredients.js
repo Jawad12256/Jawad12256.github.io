@@ -12,7 +12,7 @@ export const ingredients = [
     { id: 'printer',    label: '3D Printer',        icon: 'printer' },
     { id: 'wheels',     label: 'Wheels',            icon: 'wheels' },
     { id: 'simulation', label: 'Simulation',        icon: 'simulation' },
-    { id: 'controller', label: 'Gaming Controller', icon: 'controller' },
+    { id: 'controller', label: 'Controller',        icon: 'controller' },
     { id: 'blueprint',  label: 'Blueprint',         icon: 'blueprint' }
 ];
 
