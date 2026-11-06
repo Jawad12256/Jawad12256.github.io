@@ -26,6 +26,7 @@ import dataHero from '../assets/data-science/hero.jpg';
 import notebook from '../assets/data-science/ipynb.jpg';
 import projectabbreviated from '../assets/data-science/projectabbreviated.pdf';
 import printingHero from '../assets/3d-printing/hero.png';
+import headphonesstand from '../assets/3d-printing/headphonesstand.jpg';
 import makerworld from '../assets/3d-printing/makerworld.jpg';
 import bambu from '../assets/3d-printing/bambu.jpg';
 import phonestand1 from '../assets/3d-printing/phonestand1.jpg';
@@ -438,6 +439,13 @@ export const projects = [
                 src: printing,
                 alt: 'Video of 3D printing in progress',
                 caption: 'A video of 3D printing in progress on my Bambu Lab A1.'
+            },
+
+            {
+                // PLACEHOLDER caption — please review
+                src: headphonesstand,
+                alt: '3D-printed headphone stand',
+                caption: 'A headphone stand I designed and 3D-printed.'
             }
         ],
         links: {

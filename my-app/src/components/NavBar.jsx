@@ -10,7 +10,7 @@ function Navbar() {
                 <div className="navbar__links">
                     <a href="#projects">Projects</a>
                     <a href="#experience">Experience</a>
-                    <a href="#achievements">Achievements</a>
+                    <a href="#achievements">Awards</a>
                     <a href="#contact">Contact</a>
                 </div>
 

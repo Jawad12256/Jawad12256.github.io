@@ -1,14 +1,22 @@
-import f1isHero from '../assets/f1is/hero.png';
-import bandsaw from '../assets/f1is/bandsaw.png';
-import cfd from '../assets/f1is/cfd.png';
-import fea from '../assets/f1is/fea.png';
-import technicaldrawing from '../assets/f1is/technicaldrawing.png';
-import winner from '../assets/f1is/winner.png';
+import f1isHero from '../assets/f1is/hero.jpg';
+import f1isBandsaw from '../assets/f1is/bandsaw.jpg';
+import f1isCfd from '../assets/f1is/cfd.png';
+import f1isFea from '../assets/f1is/fea.jpg';
+import f1isTechnicalDrawing from '../assets/f1is/technicaldrawing.jpg';
+import f1isStand from '../assets/f1is/stand.jpg';
+import f1isTrack from '../assets/f1is/track.jpg';
 
-import uksdcHero from '../assets/uksdc/hero.png';
-import mpdthruster from '../assets/uksdc/mpdthruster.png';
-import photobioreactor from '../assets/uksdc/photobioreactor.png';
-import technicaldrawing2 from '../assets/uksdc/technicaldrawing.png';
+import uksdcHero from '../assets/uksdc/hero.jpg';
+import uksdcCertificates from '../assets/uksdc/certificates.jpg';
+import uksdcElevatorRobots from '../assets/uksdc/elevatorrobots.jpeg';
+import uksdcHighlights from '../assets/uksdc/highlights.jpeg';
+
+import sroboHero from '../assets/srobo/hero.jpg';
+import sroboGiraffery from '../assets/srobo/giraffery1.jpeg';
+import sroboBuilding from '../assets/srobo/buildingrobot.jpeg';
+import sroboOldRobot from '../assets/srobo/oldrobot.jpeg';
+import sroboCommunity from '../assets/srobo/community.jpeg';
+import sroboInAction from '../assets/srobo/robotinaction.mp4';
 
 export const achievements = [
 
@@ -50,19 +58,22 @@ export const achievements = [
                 caption: 'Our National Finals space settlement design.'
             },
             {
-                src: mpdthruster,
-                alt: 'Magnetoplasmadynamic thruster design',
-                caption: 'Proposed MPD thruster manufacturing using lunar resources.'
+                // PLACEHOLDER caption — please review
+                src: uksdcElevatorRobots,
+                alt: 'Autonomous construction robots concept',
+                caption: 'Concept render of the autonomous construction and maintenance robots I proposed.'
             },
             {
-                src: photobioreactor,
-                alt: 'Photobioreactor design',
-                caption: 'A photobioreactor concept developed for the settlement.'
+                // PLACEHOLDER caption — please review
+                src: uksdcHighlights,
+                alt: 'UK Space Design Competition National Finals highlights',
+                caption: 'Highlights from the UKSDC National Finals.'
             },
             {
-                src: technicaldrawing2,
-                alt: 'Technical engineering drawing',
-                caption: 'Technical drawings contributing to our visual design submission.'
+                // PLACEHOLDER caption — please review
+                src: uksdcCertificates,
+                alt: 'UK Space Design Competition certificates',
+                caption: 'Our National Finals certificates.'
             }
         ],
 
@@ -106,29 +117,36 @@ export const achievements = [
                 caption: 'Our F1 in Schools competition entry.'
             },
             {
-                src: bandsaw,
+                // PLACEHOLDER caption — please review
+                src: f1isStand,
+                alt: 'F1 in Schools car on its display stand',
+                caption: 'Our finished car on its display stand.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: f1isTrack,
+                alt: 'F1 in Schools car on the race track',
+                caption: 'The car on the competition race track.'
+            },
+            {
+                src: f1isBandsaw,
                 alt: 'Manufacturing process',
                 caption: 'Workshop manufacturing and finishing.'
             },
             {
-                src: cfd,
+                src: f1isCfd,
                 alt: 'CFD analysis',
                 caption: 'Aerodynamic analysis using computational fluid dynamics.'
             },
             {
-                src: fea,
+                src: f1isFea,
                 alt: 'Finite element analysis',
                 caption: 'Structural analysis using finite element methods.'
             },
             {
-                src: technicaldrawing,
+                src: f1isTechnicalDrawing,
                 alt: 'Technical engineering drawing',
                 caption: 'Technical drawings for our car design.'
-            },
-            {
-                src: winner,
-                alt: 'F1 in Schools competition result',
-                caption: 'Celebrating our Regional 1st Place result.'
             }
         ],
 
@@ -142,6 +160,11 @@ export const achievements = [
         year: '2025',
 
         award: 'Quarter-Finalists',
+
+        heroImage: {
+            src: sroboHero,
+            alt: 'Our Student Robotics robot, Girafferey'
+        },
 
         shortDescription:
             'Autonomous robotics competition involving the design, programming and manufacture of a two-wheel-drive robot.',
@@ -161,7 +184,44 @@ export const achievements = [
             'Problem Solving'
         ],
 
-        images: [],
+        images: [
+            {
+                // PLACEHOLDER caption — please review
+                src: sroboHero,
+                alt: 'Our Student Robotics robot, Girafferey',
+                caption: 'Girafferey, our competition robot.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: sroboGiraffery,
+                alt: 'Girafferey, our two-wheel-drive robot',
+                caption: 'A closer look at Girafferey and its lifting and clamping arms.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: sroboBuilding,
+                alt: 'Building the robot',
+                caption: 'Building and assembling the robot during the design process.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: sroboOldRobot,
+                alt: 'An earlier iteration of the robot',
+                caption: 'An earlier iteration from our iterative design process.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: sroboCommunity,
+                alt: 'The Student Robotics community',
+                caption: 'The wider Student Robotics community at the competition.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: sroboInAction,
+                alt: 'The robot competing in the arena',
+                caption: 'Girafferey competing in the arena.'
+            }
+        ],
 
         links: {
             article:

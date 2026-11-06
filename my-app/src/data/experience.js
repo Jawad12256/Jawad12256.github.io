@@ -1,3 +1,17 @@
+import trivyalHero from '../assets/internship-trivyal/hero.jpg';
+import trivyalIntro from '../assets/internship-trivyal/trivyalintro.jpg';
+import trivyalApp from '../assets/internship-trivyal/trivyal.jpg';
+
+import cyphonArchitecture from '../assets/internship-cyphon/architecturediagram.jpg';
+import cyphonInterns from '../assets/internship-cyphon/interns.jpg';
+import cyphonLiveDemo from '../assets/internship-cyphon/livedemo.jpg';
+
+import tutoringHero from '../assets/tutoring/hero.jpg';
+import tutoringSlides from '../assets/tutoring/slides.jpg';
+
+import acadRepHero from '../assets/academic-representative/hero.jpg';
+import acadRepJawad from '../assets/academic-representative/jawad.jpeg';
+
 export const experience = [
 
     {
@@ -6,6 +20,11 @@ export const experience = [
         role: 'Software Engineering Intern',
         period: 'Summer 2026',
         type: 'Internship',
+
+        heroImage: {
+            src: trivyalHero,
+            alt: 'The Trivyal vulnerability management dashboard'
+        },
 
         shortDescription:
             'Completed a 10-week software engineering internship, developing an individual full-stack security application before contributing to a collaborative, data-intensive ETL platform.',
@@ -80,7 +99,31 @@ export const experience = [
                     'Technical Presentation'
                 ],
 
-                images: [],
+                heroImage: {
+                    src: trivyalHero,
+                    alt: 'The Trivyal vulnerability management dashboard'
+                },
+
+                images: [
+                    {
+                        // PLACEHOLDER caption — please review
+                        src: trivyalHero,
+                        alt: 'The Trivyal vulnerability management dashboard',
+                        caption: 'The Trivyal dashboard for centralised vulnerability tracking.'
+                    },
+                    {
+                        // PLACEHOLDER caption — please review
+                        src: trivyalIntro,
+                        alt: 'Trivyal landing / introduction screen',
+                        caption: 'Trivyal\'s introduction screen.'
+                    },
+                    {
+                        // PLACEHOLDER caption — please review
+                        src: trivyalApp,
+                        alt: 'The Trivyal application in use',
+                        caption: 'The Trivyal application showing scanned vulnerabilities.'
+                    }
+                ],
 
                 links: {}
             },
@@ -119,7 +162,31 @@ export const experience = [
                     'Agile Development'
                 ],
 
-                images: [],
+                heroImage: {
+                    src: cyphonInterns,
+                    alt: 'The Cyphon intern team'
+                },
+
+                images: [
+                    {
+                        // PLACEHOLDER caption — please review
+                        src: cyphonInterns,
+                        alt: 'The Cyphon intern team',
+                        caption: 'The six-intern team behind Cyphon.'
+                    },
+                    {
+                        // PLACEHOLDER caption — please review
+                        src: cyphonArchitecture,
+                        alt: 'Cyphon architecture diagram',
+                        caption: 'The architecture of the Cyphon ETL platform.'
+                    },
+                    {
+                        // PLACEHOLDER caption — please review
+                        src: cyphonLiveDemo,
+                        alt: 'Live demo of the Cyphon platform',
+                        caption: 'A live demo of the Cyphon platform processing records.'
+                    }
+                ],
 
                 links: {}
             }
@@ -163,7 +230,25 @@ export const experience = [
             'Mathematical Problem Solving'
         ],
 
-        images: [],
+        heroImage: {
+            src: tutoringHero,
+            alt: 'Tutoring Maths and Physics'
+        },
+
+        images: [
+            {
+                // PLACEHOLDER caption — please review
+                src: tutoringHero,
+                alt: 'Tutoring Maths and Physics',
+                caption: 'Tutoring GCSE and A-Level Maths and Physics.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: tutoringSlides,
+                alt: 'Example tutoring slides',
+                caption: 'Example lesson slides I created for my students.'
+            }
+        ],
 
         links: {}
     },
@@ -194,7 +279,25 @@ export const experience = [
             'Resource Development'
         ],
 
-        images: [],
+        heroImage: {
+            src: acadRepHero,
+            alt: 'Representing the Design Engineering cohort'
+        },
+
+        images: [
+            {
+                // PLACEHOLDER caption — please review
+                src: acadRepHero,
+                alt: 'Representing the Design Engineering cohort',
+                caption: 'Representing my Design Engineering cohort at Imperial College London.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: acadRepJawad,
+                alt: 'Jawad in the Academic Representative role',
+                caption: 'In my role as Academic Representative.'
+            }
+        ],
 
         links: {}
     }
