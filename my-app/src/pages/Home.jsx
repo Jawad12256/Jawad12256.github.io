@@ -4,7 +4,7 @@ import Card from '../components/Card';
 import IdentityMarquee from '../components/IdentityMarquee';
 import Paragraphs from '../components/Paragraphs';
 import LinkButton from '../components/LinkButton';
-import { ImagesIcon } from '../components/icons/BrandIcons';
+import { ImagesIcon, PickaxeIcon } from '../components/icons/BrandIcons';
 import { useModal } from '../context/ModalContext';
 
 import {
@@ -66,6 +66,11 @@ function Home() {
                                 to="/gallery"
                                 icon={ImagesIcon}
                                 label="See my Gallery"
+                            />
+                            <LinkButton
+                                to="/craft"
+                                icon={PickaxeIcon}
+                                label="Try Crafting Mode"
                             />
                         </div>
 

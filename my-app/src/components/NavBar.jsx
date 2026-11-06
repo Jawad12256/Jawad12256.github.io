@@ -50,6 +50,7 @@ function Navbar() {
                     ))}
 
                     <Link to="/gallery">Gallery</Link>
+                    <Link to="/craft">Craft</Link>
                 </div>
 
             </div>

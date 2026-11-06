@@ -1,0 +1,371 @@
+/* ================================
+   Crafting Mode — pixel-art visual language (Spec 11, Path A)
+   Built from the existing design tokens + a pixel web-font. Blocky,
+   Minecraft-inspired slots/grid/inventory/book, but clearly on-brand.
+   ================================ */
+
+.craft {
+    display: grid;
+    gap: var(--space-8);
+}
+
+.craft__intro {
+    color: var(--text-body);
+}
+
+.craft__pixel,
+.craft__title,
+.craft-slot__label,
+.discovery-entry__title,
+.craft-feedback {
+    font-family: 'Press Start 2P', var(--font-primary);
+}
+
+/* Pixel headings are chunky — keep them small for legibility */
+.craft__title {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--text-heading);
+}
+
+/* --- shared blocky cell look --- */
+.pixel-cell {
+    background: var(--bg-sunken);
+    border: 2px solid var(--border-strong);
+    box-shadow:
+        inset 2px 2px 0 rgba(255, 255, 255, 0.04),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.4);
+    image-rendering: pixelated;
+}
+
+/* ================================
+   Inventory
+   ================================ */
+
+.craft-inventory {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.craft-ingredient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+
+    width: 76px;
+    padding: var(--space-3) var(--space-2);
+
+    cursor: pointer;
+    color: var(--text-body);
+
+    background: var(--bg-raised);
+    border: 2px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+
+    transition: border-color 120ms ease, transform 120ms ease;
+}
+
+.craft-ingredient:hover,
+.craft-ingredient:focus-visible {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    outline: none;
+}
+
+.craft-ingredient__icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.craft-ingredient__label {
+    font-size: var(--text-xs);
+    text-align: center;
+}
+
+/* ================================
+   2x2 crafting grid + result
+   ================================ */
+
+.craft-table {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+}
+
+.craft-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 64px);
+    grid-template-rows: repeat(2, 64px);
+    gap: var(--space-2);
+    padding: var(--space-3);
+
+    background: var(--bg-raised);
+    border: 3px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+}
+
+.craft-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 64px;
+    height: 64px;
+
+    cursor: pointer;
+    color: var(--text-heading);
+    font-size: 2rem;
+
+    border-radius: 2px;
+}
+
+.craft-slot--filled:hover {
+    border-color: var(--accent);
+}
+
+.craft-arrow {
+    color: var(--text-dim);
+    font-size: var(--text-xl);
+}
+
+.craft-result-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 72px;
+    height: 72px;
+
+    border-radius: 2px;
+}
+
+.craft-actions {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+}
+
+.craft-button {
+    font-family: 'Press Start 2P', var(--font-primary);
+    font-size: var(--text-xs);
+
+    padding: var(--space-3) var(--space-4);
+
+    color: var(--text-on-accent);
+    background: var(--accent);
+    border: 2px solid var(--accent-hover);
+    border-radius: var(--radius-sm);
+
+    cursor: pointer;
+    transition: background 120ms ease;
+}
+
+.craft-button--secondary {
+    color: var(--text-body);
+    background: var(--bg-raised);
+    border-color: var(--border-strong);
+}
+
+.craft-button:hover,
+.craft-button:focus-visible {
+    background: var(--accent-hover);
+    outline: none;
+}
+
+.craft-button--secondary:hover,
+.craft-button--secondary:focus-visible {
+    background: var(--bg-raised-hover);
+}
+
+/* ================================
+   Feedback banner
+   ================================ */
+
+.craft-feedback {
+    font-size: var(--text-xs);
+    line-height: 1.7;
+
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--border-strong);
+    background: var(--bg-raised);
+    color: var(--text-body);
+}
+
+.craft-feedback--success {
+    border-color: var(--accent);
+    color: var(--text-heading);
+}
+
+.craft-feedback--close {
+    border-color: #f5c451;
+}
+
+/* ================================
+   Discovery Book
+   ================================ */
+
+.discovery-book__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+}
+
+.discovery-progress {
+    font-family: 'Press Start 2P', var(--font-primary);
+    font-size: var(--text-xs);
+    color: var(--accent);
+}
+
+.discovery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-4);
+}
+
+.discovery-entry {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+
+    padding: var(--space-3);
+    text-align: left;
+
+    background: var(--bg-raised);
+    border: 2px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+}
+
+.discovery-entry--locked {
+    color: var(--text-dim);
+}
+
+.discovery-entry--unlocked {
+    cursor: pointer;
+    border-color: var(--accent);
+    color: var(--text-heading);
+    transition: transform 120ms ease;
+}
+
+.discovery-entry--unlocked:hover,
+.discovery-entry--unlocked:focus-visible {
+    transform: translateY(-2px);
+    outline: none;
+}
+
+.discovery-entry__thumb {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 2px;
+    background: var(--bg-sunken);
+}
+
+.discovery-entry__thumb--locked {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--border-strong);
+}
+
+.discovery-entry__title {
+    font-size: var(--text-xs);
+    line-height: 1.5;
+}
+
+.discovery-entry__hint {
+    font-size: var(--text-xs);
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+/* ================================
+   Master Crafter celebration (one-time)
+   ================================ */
+
+.master-crafter {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+
+    background: rgba(6, 7, 10, 0.88);
+    backdrop-filter: blur(4px);
+}
+
+.master-crafter__card {
+    text-align: center;
+    padding: var(--space-10) var(--space-8);
+
+    background: var(--bg-raised);
+    border: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+
+    animation: master-pop 350ms ease;
+}
+
+.master-crafter__title {
+    font-family: 'Press Start 2P', var(--font-primary);
+    font-size: var(--text-lg);
+    color: var(--accent);
+    margin-bottom: var(--space-5);
+    line-height: 1.6;
+}
+
+.master-crafter__text {
+    color: var(--text-body);
+    margin-bottom: var(--space-6);
+}
+
+@keyframes master-pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+@keyframes craft-pop {
+    0%   { transform: scale(0.6); }
+    60%  { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+.craft-result-slot--new {
+    animation: craft-pop 300ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .craft-ingredient,
+    .discovery-entry--unlocked,
+    .master-crafter__card,
+    .craft-result-slot--new {
+        transition: none;
+        animation: none;
+    }
+
+}
+
+/* ================================
+   Mobile
+   ================================ */
+
+@media (max-width: 600px) {
+
+    .craft-table {
+        justify-content: center;
+    }
+
+    .craft-ingredient {
+        width: 64px;
+    }
+
+}

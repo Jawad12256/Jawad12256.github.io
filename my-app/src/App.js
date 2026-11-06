@@ -5,6 +5,7 @@ import AppShell from './layout/AppShell';
 import GlobalModal from './components/GlobalModal';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
+import Craft from './pages/Craft';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/gallery" element={<Gallery />} />
+                        <Route path="/craft" element={<Craft />} />
                     </Routes>
                 </AppShell>
 
