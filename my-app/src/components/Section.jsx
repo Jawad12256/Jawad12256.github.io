@@ -1,6 +1,14 @@
+import { useReveal } from '../hooks/useReveal';
+
 function Section({ id, eyebrow, title, children }) {
+    const [ref, shown] = useReveal();
+
     return (
-        <section id={id} className="section">
+        <section
+            id={id}
+            className={'section reveal' + (shown ? ' reveal--shown' : '')}
+            ref={ref}
+        >
 
             <div className="container">
 
