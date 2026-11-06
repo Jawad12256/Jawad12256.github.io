@@ -1,36 +1,40 @@
 name: Deploy to GitHub Pages
 
-# Deployment baseline for the nested `my-app/` Create React App.
+# Single, official GitHub Pages pipeline for the nested `my-app/` CRA app.
 #
-# IMPORTANT (per Spec 1 — build-and-deployment-baseline):
-# This workflow is configuration only. It is set to manual dispatch so
-# that NOTHING deploys automatically. An actual deployment happens only
-# when the repository owner explicitly runs this workflow (and then only
-# after the source has been merged to the intended branch). The `push`
-# trigger is intentionally left commented out until the owner approves
-# automatic deploys.
+# This uses GitHub's native Pages deployment (upload-pages-artifact +
+# deploy-pages) instead of pushing to a `gh-pages` branch. That removes
+# the previous dual-pipeline setup (our workflow + GitHub's legacy
+# branch-based "pages build and deployment"), which was the source of
+# intermittent "Deployment failed, try again later" stalls.
+#
+# REQUIRES a one-time repo setting:
+#   Settings -> Pages -> Build and deployment -> Source: "GitHub Actions"
+#
+# Runs on manual dispatch, and automatically on pushes to main.
 
 on:
   workflow_dispatch:
-  # Uncomment to enable automatic deploys once the owner approves:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
 
-# GitHub Pages deploy via the gh-pages branch (matches the existing
-# `gh-pages` tooling and `homepage` setting in my-app/package.json).
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; don't cancel an in-progress one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-
-    # All app steps run inside the nested app directory.
     defaults:
       run:
         working-directory: my-app
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,13 +51,21 @@ jobs:
 
       - name: Build
         # CI defaults to true on GitHub Actions, so CRA treats warnings
-        # as errors here — matching the Amplify behaviour. The source is
-        # kept warning-clean so this passes.
+        # as errors. The source is kept warning-clean so this passes.
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./my-app/build
-          publish_branch: gh-pages
+          path: my-app/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
