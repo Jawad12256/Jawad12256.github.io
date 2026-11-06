@@ -369,3 +369,206 @@
     }
 
 }
+
+/* ================================
+   Spec 12 — interaction polish
+   ================================ */
+
+/* Toolbar (intro + mute) */
+.craft__toolbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+}
+
+.craft-mute {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.craft-mute svg {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+/* Crafted result slot — red-tinted so it reads as a "product" */
+.craft-result-slot {
+    background: rgba(232, 102, 62, 0.16);
+    border-color: #e8663e;
+    cursor: default;
+}
+
+.craft-result-slot--filled {
+    cursor: pointer;
+}
+
+.craft-result-slot--filled:hover,
+.craft-result-slot--filled:focus-visible {
+    background: rgba(232, 102, 62, 0.28);
+    outline: none;
+}
+
+/* Green drop-target outline while dragging over a slot */
+.craft-slot.is-drop-target {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+/* Progress row (count + Recipe Book button) */
+.craft__progress-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+}
+
+/* ================================
+   Recipe Book lightbox
+   ================================ */
+
+.recipe-book-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding: var(--space-8) var(--space-4);
+    overflow-y: auto;
+
+    background: rgba(6, 7, 10, 0.78);
+    backdrop-filter: blur(4px);
+}
+
+.recipe-book {
+    position: relative;
+    width: min(100%, 900px);
+
+    padding: var(--space-10) var(--space-6) var(--space-8);
+
+    background: var(--bg-raised);
+    border: 3px solid var(--border-strong);
+    border-radius: var(--radius-md);
+}
+
+.recipe-book__close {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--bg-sunken);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-body);
+    font-size: var(--text-xl);
+    line-height: 1;
+    cursor: pointer;
+}
+
+.recipe-book__close:hover,
+.recipe-book__close:focus-visible {
+    color: var(--accent);
+    border-color: var(--accent);
+    outline: none;
+}
+
+/* ================================
+   Advancement-style craft notifications (toasts)
+   ================================ */
+
+.craft-toasts {
+    position: fixed;
+    top: calc(var(--nav-height) + 1rem);
+    right: 1rem;
+    z-index: 1050;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    pointer-events: none;
+}
+
+.craft-toast {
+    pointer-events: auto;
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+
+    min-width: 220px;
+    max-width: 300px;
+    padding: var(--space-3) var(--space-4);
+
+    background: var(--bg-raised);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-sm);
+
+    animation: toast-in 250ms ease;
+}
+
+.craft-toast__icon {
+    font-size: 1.8rem;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.2rem;
+    height: 2.2rem;
+
+    background: rgba(232, 102, 62, 0.16);
+    border: 1px solid #e8663e;
+    border-radius: 2px;
+}
+
+.craft-toast__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.craft-toast__eyebrow {
+    font-family: 'Press Start 2P', var(--font-primary);
+    font-size: 0.5rem;
+    color: var(--accent);
+}
+
+.craft-toast__title {
+    font-size: var(--text-sm);
+    color: var(--text-heading);
+}
+
+@keyframes toast-in {
+    from { transform: translateX(120%); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .craft-toast {
+        animation: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .craft-toasts {
+        left: 1rem;
+        right: 1rem;
+    }
+    .craft-toast {
+        max-width: none;
+    }
+}
