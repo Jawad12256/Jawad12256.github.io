@@ -2,6 +2,8 @@
 // key, with clarifying text where the platform alone is ambiguous.
 // Used by both the ContentModal and the Contact section.
 
+import { Link } from 'react-router-dom';
+
 import {
     GitHubIcon,
     LinkedInIcon,
@@ -44,7 +46,17 @@ const prettify = (key) =>
         .replace(/([a-z])([A-Z])/g, '$1 $2')
         .replace(/^./, (c) => c.toUpperCase());
 
-function LinkButton({ linkKey, href }) {
+function LinkButton({ linkKey, href, to, label: labelProp, icon: IconProp }) {
+    // Internal route button (client-side navigation via react-router).
+    if (to) {
+        return (
+            <Link className="link-button" to={to}>
+                {IconProp && <IconProp />}
+                {labelProp && <span>{labelProp}</span>}
+            </Link>
+        );
+    }
+
     if (!href) {
         return null;
     }

@@ -1,12 +1,11 @@
-import { useState } from 'react';
-
 import Section from '../components/Section';
 import ProjectCard from '../components/ProjectCard';
 import Card from '../components/Card';
 import IdentityMarquee from '../components/IdentityMarquee';
-import ContentModal from '../components/ContentModal';
 import Paragraphs from '../components/Paragraphs';
 import LinkButton from '../components/LinkButton';
+import { ImagesIcon } from '../components/icons/BrandIcons';
+import { useModal } from '../context/ModalContext';
 
 import {
     profile,
@@ -26,10 +25,7 @@ import {
 } from '../utils/normaliseContent';
 
 function Home() {
-    const [activeItem, setActiveItem] = useState(null);
-
-    const openItem = (item) => setActiveItem(item);
-    const closeModal = () => setActiveItem(null);
+    const { openItem } = useModal();
 
     return (
         <div id="top">
@@ -64,6 +60,14 @@ function Home() {
                             text={profile.introduction}
                             className="hero__description"
                         />
+
+                        <div className="hero__actions">
+                            <LinkButton
+                                to="/gallery"
+                                icon={ImagesIcon}
+                                label="See my Gallery"
+                            />
+                        </div>
 
                     </div>
 
@@ -194,8 +198,6 @@ function Home() {
                     )}
                 </div>
             </Section>
-
-            <ContentModal item={activeItem} onClose={closeModal} />
 
         </div>
     );
