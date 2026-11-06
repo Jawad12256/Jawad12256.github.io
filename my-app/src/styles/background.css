@@ -1,0 +1,130 @@
+/* ================================
+   Subtle extruded-square background (Spec 13 — experiment)
+   Fixed to the viewport, behind all content, non-interactive. Squares
+   extrude inward from the left and right edges, tinted slightly toward
+   the mint accent over the base background, faded toward the centre so
+   they only read near the edges. An optional mint spark traces each
+   edge band. Entirely removable (this file + its import + the App mount).
+   ================================ */
+
+.bg-flair {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    pointer-events: none;
+
+    background: var(--bg);
+    overflow: hidden;
+}
+
+/* Left and right square-grid bands */
+.bg-flair::before,
+.bg-flair::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(90px, 14vw, 200px);
+
+    /* A faint grid of squares: two sets of thin lines crossing. The
+       colour is mint at very low alpha over the dark background. */
+    background-image:
+        linear-gradient(
+            to right,
+            rgba(62, 232, 168, 0.06) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(62, 232, 168, 0.06) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            135deg,
+            rgba(62, 232, 168, 0.05),
+            rgba(62, 232, 168, 0) 70%
+        );
+    background-size: 32px 32px, 32px 32px, 100% 100%;
+
+    opacity: 0.6;
+}
+
+/* Left band: fade OUT toward the centre (fully visible at the edge) */
+.bg-flair::before {
+    left: 0;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0)
+    );
+    mask-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0)
+    );
+}
+
+/* Right band: mirror of the left */
+.bg-flair::after {
+    right: 0;
+    -webkit-mask-image: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0)
+    );
+    mask-image: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0)
+    );
+}
+
+/* Optional mint spark tracing each edge band's perimeter */
+.bg-flair__spark {
+    position: absolute;
+    top: 0;
+
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+
+    background: var(--accent);
+    box-shadow: 0 0 8px 2px rgba(62, 232, 168, 0.55);
+
+    opacity: 0.7;
+}
+
+.bg-flair__spark--left {
+    left: clamp(90px, 14vw, 200px);
+    animation: spark-left 14s linear infinite;
+}
+
+.bg-flair__spark--right {
+    right: clamp(90px, 14vw, 200px);
+    animation: spark-right 14s linear infinite;
+}
+
+/* Travel down one edge of the band and back up (subtle perimeter trace) */
+@keyframes spark-left {
+    0%   { top: 0%; opacity: 0; }
+    10%  { opacity: 0.7; }
+    50%  { top: 100%; opacity: 0.7; }
+    60%  { opacity: 0; }
+    100% { top: 0%; opacity: 0; }
+}
+
+@keyframes spark-right {
+    0%   { top: 100%; opacity: 0; }
+    10%  { opacity: 0.7; }
+    50%  { top: 0%; opacity: 0.7; }
+    60%  { opacity: 0; }
+    100% { top: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bg-flair__spark {
+        animation: none;
+        display: none;
+    }
+}

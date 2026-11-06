@@ -78,17 +78,28 @@ function Craft() {
         }
     }, [masterCrafterEarned, masterCrafterCelebrated, play]);
 
-    // --- toast lifecycle ---
+    // --- toast lifecycle: slide in, hold, slide out, remove ---
     const pushToast = useCallback(
         (resultId, title) => {
             const id = ++toastId.current;
-            setToasts((t) => [...t, { id, resultId, title }]);
+            setToasts((t) => [
+                ...t,
+                { id, resultId, title, exiting: false }
+            ]);
             play('notifIn');
+            // Start the slide-OUT after the hold.
             setTimeout(() => {
                 play('notifOut');
+                setToasts((t) =>
+                    t.map((x) =>
+                        x.id === id ? { ...x, exiting: true } : x
+                    )
+                );
+                // Remove once the slide-out animation (250ms) completes.
                 setTimeout(
-                    () => setToasts((t) => t.filter((x) => x.id !== id)),
-                    300
+                    () =>
+                        setToasts((t) => t.filter((x) => x.id !== id)),
+                    280
                 );
             }, TOAST_MS);
         },
@@ -173,6 +184,9 @@ function Craft() {
             if (item) {
                 openItem(item);
             }
+            // Crafting "uses up" the ingredients: clear the grid directly
+            // (not via removeSlot) so no per-slot remove sound fires.
+            setSlots(EMPTY_SLOTS);
         },
         [craftableRecipe, isNewResult, discover, play, pushToast, openItem]
     );

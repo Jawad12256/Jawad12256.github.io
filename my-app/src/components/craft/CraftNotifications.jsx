@@ -13,7 +13,13 @@ function CraftNotifications({ toasts }) {
     return (
         <div className="craft-toasts" aria-live="polite">
             {toasts.map((toast) => (
-                <div className="craft-toast" key={toast.id}>
+                <div
+                    className={
+                        'craft-toast' +
+                        (toast.exiting ? ' craft-toast--exiting' : '')
+                    }
+                    key={toast.id}
+                >
                     <span className="craft-toast__icon">
                         <ResultIcon
                             resultId={toast.resultId}
