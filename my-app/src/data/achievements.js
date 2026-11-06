@@ -58,21 +58,18 @@ export const achievements = [
                 caption: 'Our National Finals space settlement design.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: uksdcElevatorRobots,
                 alt: 'Autonomous construction robots concept',
-                caption: 'Concept render of the autonomous construction and maintenance robots I proposed.'
+                caption: 'Annotated renders of the autonomous construction and maintenance robots I proposed.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: uksdcHighlights,
                 alt: 'UK Space Design Competition National Finals highlights',
-                caption: 'Highlights from the UKSDC National Finals.'
+                caption: 'Highlights images from the UKSDC National Finals.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: uksdcCertificates,
-                alt: 'UK Space Design Competition certificates',
+                alt: 'Team photo with National Finals certificates',
                 caption: 'Our National Finals certificates.'
             }
         ],
@@ -117,16 +114,14 @@ export const achievements = [
                 caption: 'Our F1 in Schools competition entry.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: f1isStand,
                 alt: 'F1 in Schools car on its display stand',
-                caption: 'Our finished car on its display stand.'
+                caption: 'Our original car prototype on its display stand.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: f1isTrack,
                 alt: 'F1 in Schools car on the race track',
-                caption: 'The car on the competition race track.'
+                caption: 'Our latest car design on the competition race track.'
             },
             {
                 src: f1isBandsaw,
@@ -141,7 +136,7 @@ export const achievements = [
             {
                 src: f1isFea,
                 alt: 'Finite element analysis',
-                caption: 'Structural analysis using finite element methods.'
+                caption: 'Structural analysis of wheel spokes using finite element methods.'
             },
             {
                 src: f1isTechnicalDrawing,
@@ -186,37 +181,31 @@ export const achievements = [
 
         images: [
             {
-                // PLACEHOLDER caption — please review
                 src: sroboHero,
                 alt: 'Our Student Robotics robot, Girafferey',
                 caption: 'Girafferey, our competition robot.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: sroboGiraffery,
                 alt: 'Girafferey, our two-wheel-drive robot',
                 caption: 'A closer look at Girafferey and its lifting and clamping arms.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: sroboBuilding,
                 alt: 'Building the robot',
-                caption: 'Building and assembling the robot during the design process.'
+                caption: 'Building and assembling the robot in early iterations.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: sroboOldRobot,
-                alt: 'An earlier iteration of the robot',
-                caption: 'An earlier iteration from our iterative design process.'
+                alt: 'UFO-inspired competition robot design',
+                caption: 'Our 2024 competition robot, inspired by UFOs.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: sroboCommunity,
                 alt: 'The Student Robotics community',
                 caption: 'The wider Student Robotics community at the competition.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: sroboInAction,
                 alt: 'The robot competing in the arena',
                 caption: 'Girafferey competing in the arena.'

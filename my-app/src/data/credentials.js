@@ -32,16 +32,14 @@ export const credentials = [
 
         images: [
             {
-                // PLACEHOLDER caption — please review
                 src: awsHero,
-                alt: 'AWS Certified Cloud Practitioner',
-                caption: 'My AWS Certified Cloud Practitioner certification.'
+                alt: 'AWS',
+                caption: 'AWS'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: awsCertification,
                 alt: 'AWS Certified Cloud Practitioner certificate',
-                caption: 'The AWS Certified Cloud Practitioner certificate.'
+                caption: 'My AWS Certified Cloud Practitioner certificate.'
             }
         ],
 

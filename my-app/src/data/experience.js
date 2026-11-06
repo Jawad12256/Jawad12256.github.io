@@ -101,27 +101,24 @@ export const experience = [
 
                 heroImage: {
                     src: trivyalHero,
-                    alt: 'The Trivyal vulnerability management dashboard'
+                    alt: 'Gemba Advantage'
                 },
 
                 images: [
                     {
-                        // PLACEHOLDER caption — please review
                         src: trivyalHero,
-                        alt: 'The Trivyal vulnerability management dashboard',
-                        caption: 'The Trivyal dashboard for centralised vulnerability tracking.'
+                        alt: 'Gemba Advantage',
+                        caption: 'Gemba Advantage'
                     },
                     {
-                        // PLACEHOLDER caption — please review
                         src: trivyalIntro,
-                        alt: 'Trivyal landing / introduction screen',
-                        caption: 'Trivyal\'s introduction screen.'
+                        alt: 'Trivyal overview slide',
+                        caption: 'An overview of Trivyal\'s key features and functionality.'
                     },
                     {
-                        // PLACEHOLDER caption — please review
                         src: trivyalApp,
-                        alt: 'The Trivyal application in use',
-                        caption: 'The Trivyal application showing scanned vulnerabilities.'
+                        alt: 'Trivyal logo',
+                        caption: 'Trivyal application logo'
                     }
                 ],
 
@@ -169,22 +166,19 @@ export const experience = [
 
                 images: [
                     {
-                        // PLACEHOLDER caption — please review
                         src: cyphonInterns,
-                        alt: 'The Cyphon intern team',
-                        caption: 'The six-intern team behind Cyphon.'
+                        alt: 'The intern team',
+                        caption: 'The six-intern team at my internship, who I developed Cyphon alongside.'
                     },
                     {
-                        // PLACEHOLDER caption — please review
                         src: cyphonArchitecture,
                         alt: 'Cyphon architecture diagram',
-                        caption: 'The architecture of the Cyphon ETL platform.'
+                        caption: 'The backend architecture of the Cyphon ETL platform.'
                     },
                     {
-                        // PLACEHOLDER caption — please review
                         src: cyphonLiveDemo,
                         alt: 'Live demo of the Cyphon platform',
-                        caption: 'A live demo of the Cyphon platform processing records.'
+                        caption: 'We live-demoed Cyphon to senior engineers and executives at Gemba Advantage, showcasing its ability to process thousands of records per day.'
                     }
                 ],
 
@@ -237,13 +231,11 @@ export const experience = [
 
         images: [
             {
-                // PLACEHOLDER caption — please review
                 src: tutoringHero,
                 alt: 'Tutoring Maths and Physics',
                 caption: 'Tutoring GCSE and A-Level Maths and Physics.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: tutoringSlides,
                 alt: 'Example tutoring slides',
                 caption: 'Example lesson slides I created for my students.'
@@ -286,16 +278,14 @@ export const experience = [
 
         images: [
             {
-                // PLACEHOLDER caption — please review
                 src: acadRepHero,
                 alt: 'Representing the Design Engineering cohort',
                 caption: 'Representing my Design Engineering cohort at Imperial College London.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: acadRepJawad,
                 alt: 'Jawad in the Academic Representative role',
-                caption: 'In my role as Academic Representative.'
+                caption: 'My role as academic representative amplifies student voices to improve the academic experience, but also makes me a beacon for my peers.'
             }
         ],
 

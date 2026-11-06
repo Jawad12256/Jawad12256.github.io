@@ -442,10 +442,9 @@ export const projects = [
             },
 
             {
-                // PLACEHOLDER caption — please review
                 src: headphonesstand,
-                alt: '3D-printed headphone stand',
-                caption: 'A headphone stand I designed and 3D-printed.'
+                alt: '3D-printed headphone stand design process',
+                caption: 'Sketching, prototyping and iterating a design for my headphones stand.'
             }
         ],
         links: {

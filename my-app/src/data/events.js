@@ -39,28 +39,24 @@ export const events = [
 
         images: [
             {
-                // PLACEHOLDER caption — please review
                 src: iosdcHero,
                 alt: 'Interhouse Olaves Space Design Competition',
                 caption: 'The first Interhouse Olaves Space Design Competition.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: iosdcAssembly,
                 alt: 'Launch assembly for the competition',
-                caption: 'The launch assembly introducing the competition to students.'
+                caption: 'Our launch assembly, introducing the competition to Y7-10 students.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: iosdcDetails,
                 alt: 'Competition details',
-                caption: 'The competition details and brief shared with participants.'
+                caption: 'An overview of the competition details, including the judging criteria and timeline.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: iosdcRfp,
                 alt: 'Request for proposal brief',
-                caption: 'The request-for-proposal brief students worked from.'
+                caption: 'A snippet from the request for proposal brief.'
             }
         ],
 
@@ -96,38 +92,33 @@ export const events = [
 
         images: [
             {
-                // PLACEHOLDER caption — please review
                 src: iftarTitle,
                 alt: 'Annual Interfaith Iftar',
                 caption: 'The Annual Interfaith Iftar at St Olave\'s Grammar School.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: iftarDonutSale,
-                alt: 'Doughnut fundraising sale',
-                caption: 'A doughnut sale that helped raise starting funds for the event.'
+                alt: 'Doughnut fundraising sale poster',
+                caption: 'Poster for our doughnut sale that helped raise starting funds for the event.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: iftarHall1,
                 alt: 'The event hall during the Iftar',
-                caption: 'The hall during the Interfaith Iftar.'
+                caption: 'A closer look inside the event hall.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: iftarHall2,
                 alt: 'The event hall during the Iftar',
                 caption: 'Over 200 guests gathered for the evening.'
             },
             {
-                // PLACEHOLDER caption — please review
                 src: iftarHighlights,
                 alt: 'Highlights from the Interfaith Iftar',
                 caption: 'Highlights from the evening.'
             }
         ],
 
-        links: {}
+        links: {Instagram: 'https://www.instagram.com/p/DHLSvBcK9Kf/?img_index=2'}
     }
 
 ];
