@@ -16,6 +16,11 @@
 
     background: var(--bg);
     overflow: hidden;
+
+    /* TWEAK: mint glow radius for BOTH the walking sparks and the cursor
+       glow. Increase for a larger illuminated area; decrease for a
+       tighter glow. */
+    --spark-glow-radius: 42px;
 }
 
 /* Left and right square-grid bands */
@@ -80,51 +85,56 @@
     );
 }
 
-/* Optional mint spark tracing each edge band's perimeter */
-.bg-flair__spark {
+/* Shared mint glow for sparks + cursor: a bright core fading to a soft
+   mint halo that "illuminates" the grid. Driven by --spark-glow-radius. */
+.bg-flair__spark,
+.bg-flair__cursor {
     position: absolute;
     top: 0;
+    left: 0;
 
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
 
     background: var(--accent);
-    box-shadow: 0 0 8px 2px rgba(62, 232, 168, 0.55);
+    box-shadow:
+        0 0 calc(var(--spark-glow-radius) * 0.35)
+            calc(var(--spark-glow-radius) * 0.10) rgba(62, 232, 168, 0.55),
+        0 0 var(--spark-glow-radius)
+            calc(var(--spark-glow-radius) * 0.28) rgba(62, 232, 168, 0.28),
+        0 0 calc(var(--spark-glow-radius) * 1.8)
+            calc(var(--spark-glow-radius) * 0.5) rgba(62, 232, 168, 0.12);
 
-    opacity: 0.7;
+    will-change: transform, opacity;
 }
 
-.bg-flair__spark--left {
-    left: clamp(90px, 14vw, 200px);
-    animation: spark-left 14s linear infinite;
+/* Walking sparks: glide between grid nodes; JS sets the transform. */
+.bg-flair__spark {
+    opacity: 0;
+    transition:
+        transform var(--spark-step, 900ms) linear,
+        opacity 600ms ease;
 }
 
-.bg-flair__spark--right {
-    right: clamp(90px, 14vw, 200px);
-    animation: spark-right 14s linear infinite;
+.bg-flair__spark--active {
+    opacity: 0.85;
 }
 
-/* Travel down one edge of the band and back up (subtle perimeter trace) */
-@keyframes spark-left {
-    0%   { top: 0%; opacity: 0; }
-    10%  { opacity: 0.7; }
-    50%  { top: 100%; opacity: 0.7; }
-    60%  { opacity: 0; }
-    100% { top: 0%; opacity: 0; }
+/* Cursor glow: follows the pointer (JS sets the transform via rAF). */
+.bg-flair__cursor {
+    opacity: 0;
+    transition: opacity 400ms ease;
 }
 
-@keyframes spark-right {
-    0%   { top: 100%; opacity: 0; }
-    10%  { opacity: 0.7; }
-    50%  { top: 0%; opacity: 0.7; }
-    60%  { opacity: 0; }
-    100% { top: 100%; opacity: 0; }
+.bg-flair__cursor--active {
+    opacity: 0.8;
 }
 
+/* Reduced motion: no autonomous walking sparks. The cursor glow tracks
+   the user's own movement (no autonomous animation), so it may remain. */
 @media (prefers-reduced-motion: reduce) {
     .bg-flair__spark {
-        animation: none;
         display: none;
     }
 }
