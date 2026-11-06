@@ -96,21 +96,30 @@ function Craft() {
     );
 
     // --- grid mutations ---
-    const placeIngredient = useCallback((ingredientId, index) => {
-        setSlots((prev) => {
-            const next = [...prev];
-            if (typeof index === 'number') {
-                next[index] = ingredientId; // place/replace at index
-            } else {
-                const empty = next.findIndex((s) => s === null);
-                if (empty === -1) {
-                    return prev; // grid full
+    const placeIngredient = useCallback(
+        (ingredientId, index) => {
+            let placed = false;
+            setSlots((prev) => {
+                const next = [...prev];
+                if (typeof index === 'number') {
+                    next[index] = ingredientId; // place/replace at index
+                    placed = true;
+                } else {
+                    const empty = next.findIndex((s) => s === null);
+                    if (empty === -1) {
+                        return prev; // grid full
+                    }
+                    next[empty] = ingredientId;
+                    placed = true;
                 }
-                next[empty] = ingredientId;
+                return next;
+            });
+            if (placed) {
+                play('clearClicked');
             }
-            return next;
-        });
-    }, []);
+        },
+        [play]
+    );
 
     const removeSlot = useCallback(
         (index) => {
@@ -214,17 +223,20 @@ function Craft() {
                     </button>
                 </div>
 
-                <Inventory onPlace={placeIngredient} />
+                {/* Inventory (2x4) and crafting grid side by side */}
+                <div className="craft__build">
+                    <Inventory onPlace={placeIngredient} />
 
-                <CraftingGrid
-                    slots={slots}
-                    craftableResultId={craftableResultId}
-                    isNewResult={isNewResult}
-                    onPlace={placeIngredient}
-                    onRemoveSlot={removeSlot}
-                    onCollect={collect}
-                    onSlotDragStart={handleSlotDragStartTrack}
-                />
+                    <CraftingGrid
+                        slots={slots}
+                        craftableResultId={craftableResultId}
+                        isNewResult={isNewResult}
+                        onPlace={placeIngredient}
+                        onRemoveSlot={removeSlot}
+                        onCollect={collect}
+                        onSlotDragStart={handleSlotDragStartTrack}
+                    />
+                </div>
 
                 <div className="craft__progress-row">
                     <span className="discovery-progress">
