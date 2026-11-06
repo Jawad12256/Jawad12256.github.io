@@ -34,10 +34,10 @@ export const events = [
         role: 'Student Team Lead',
 
         shortDescription:
-            'Led a student team to organise an Interfaith Iftar at St Olave\'s Grammar School, welcoming over 200 guests and raising £2,600 for a refugee charity.',
+            'Led the organisation of the Annual Interfaith Iftar at St Olave\'s Grammar School, welcoming over 200 guests and raising £2,600 for a refugee charity.',
 
         description:
-            'I led a student team in organising our school\'s Annual Interfaith Iftar, bringing together over 200 guests for an evening centred on community, dialogue and charitable giving. Through coordinating the student team and helping deliver the event, we raised £2,600 for a refugee charity. The Interfaith Iftar at St Olave\'s has also previously been recognised by the Mayor of London, making it a particularly rewarding opportunity to bring people together around a shared charitable purpose.',
+            'I led a student team in organising our school\'s Annual Interfaith Iftar, bringing together over 200 guests for an evening centred on community, dialogue and charitable giving. Operationally speaking, this required well over a hundred hours in a huge variety of tasks leading up to the event. For example, we raised a starting sum of money for the event through doughnut sales to students: one of many necessities among many others like coordinating catering, decorations, auction items, speakers and entertainment, volunteers, publicity, and ticket sales. By maintaining strong communication between students, parents, and staff, while ensuring all logistical aspects fell into place timely, we sucessfully raised £2,600 for a refugee charity. The Interfaith Iftar at St Olave\'s has also previously been recognised by the Mayor of London, making it a particularly rewarding opportunity to bring people together around a shared charitable purpose.',
 
         skills: [
             'Leadership',
