@@ -644,6 +644,61 @@
     height: auto;
 }
 
+/* PDF / document link (rendered by MediaItem for .pdf entries) */
+.media-item--doc {
+    background: transparent;
+    border: none;
+    overflow: visible;
+}
+
+.media-doc {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+
+    padding: var(--space-5);
+
+    color: var(--text-heading);
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+
+    font-size: var(--text-sm);
+
+    transition:
+        border-color 150ms ease,
+        background 150ms ease;
+}
+
+.media-doc:hover,
+.media-doc:focus-visible {
+    border-color: var(--accent);
+    background: var(--bg-raised-hover);
+    outline: none;
+}
+
+.media-doc svg {
+    width: 1.5em;
+    height: 1.5em;
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.media-doc__hint {
+    margin-left: auto;
+    padding-left: var(--space-3);
+
+    color: var(--text-dim);
+    font-size: var(--text-xs);
+    white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .media-doc {
+        transition: none;
+    }
+}
+
 .media-item__caption {
     padding: var(--space-3) var(--space-4);
 
@@ -760,7 +815,8 @@
 
 }
 
-/* Narrow viewport: stack the modal into one scrollable column */
+/* Narrow viewport: stack the modal into ONE scrollable column.
+   Text section first, media section below, each at natural height. */
 @media (max-width: 860px) {
 
     .modal--split,
@@ -774,18 +830,29 @@
 
     .modal__layout {
         flex-direction: column;
-        overflow-y: auto;          /* single scroll area when stacked */
         gap: 0;
+
+        overflow-y: auto;          /* the single scroll area */
+        min-height: 0;
     }
 
     .modal__main,
     .modal__media {
-        overflow-y: visible;       /* panes no longer scroll separately */
+        /* natural height so panes stack cleanly (no overlap) instead of
+           sharing height via their desktop flex values */
+        flex: 0 0 auto;
+        overflow: visible;         /* no inner scroll; the layout scrolls */
+        min-height: 0;
     }
 
     .modal__media {
         border-left: none;
         border-top: 1px solid var(--border);
+    }
+
+    /* in the stacked flow, media items need not resist shrinking */
+    .modal__media .media-item {
+        flex-shrink: 1;
     }
 
 }

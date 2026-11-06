@@ -78,7 +78,7 @@ h3 {
 
 .container {
     width: min(
-        calc(100% - 2rem),
+        calc(100% - 4rem),
         var(--content-width)
     );
 
