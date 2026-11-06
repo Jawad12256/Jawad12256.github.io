@@ -100,3 +100,15 @@ export function ExternalIcon(props) {
         </svg>
     );
 }
+
+export function PickaxeIcon(props) {
+    return (
+        <svg {...base} {...props} fill="none" stroke="currentColor"
+            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 10 3 21" />
+            <path d="M3.5 3.5a16 16 0 0 1 8 4" />
+            <path d="M20.5 3.5a16 16 0 0 0-8 4" />
+            <path d="M12 5.5 14.5 8" />
+        </svg>
+    );
+}
