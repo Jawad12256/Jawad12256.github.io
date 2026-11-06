@@ -1,3 +1,14 @@
+import iosdcHero from '../assets/iosdc/hero.jpg';
+import iosdcAssembly from '../assets/iosdc/assembly.jpg';
+import iosdcDetails from '../assets/iosdc/details.jpg';
+import iosdcRfp from '../assets/iosdc/rfp.jpg';
+
+import iftarTitle from '../assets/interfaith-iftar/title.jpg';
+import iftarDonutSale from '../assets/interfaith-iftar/donutsale.jpg';
+import iftarHall1 from '../assets/interfaith-iftar/hall1.jpeg';
+import iftarHall2 from '../assets/interfaith-iftar/hall2.jpeg';
+import iftarHighlights from '../assets/interfaith-iftar/highlights.mp4';
+
 export const events = [
 
     {
@@ -21,7 +32,37 @@ export const events = [
             'Engineering Outreach'
         ],
 
-        images: [],
+        heroImage: {
+            src: iosdcHero,
+            alt: 'Interhouse Olaves Space Design Competition'
+        },
+
+        images: [
+            {
+                // PLACEHOLDER caption — please review
+                src: iosdcHero,
+                alt: 'Interhouse Olaves Space Design Competition',
+                caption: 'The first Interhouse Olaves Space Design Competition.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: iosdcAssembly,
+                alt: 'Launch assembly for the competition',
+                caption: 'The launch assembly introducing the competition to students.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: iosdcDetails,
+                alt: 'Competition details',
+                caption: 'The competition details and brief shared with participants.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: iosdcRfp,
+                alt: 'Request for proposal brief',
+                caption: 'The request-for-proposal brief students worked from.'
+            }
+        ],
 
         links: {}
     },
@@ -48,7 +89,42 @@ export const events = [
             'Community Engagement'
         ],
 
+        heroImage: {
+            src: iftarTitle,
+            alt: 'Annual Interfaith Iftar'
+        },
+
         images: [
+            {
+                // PLACEHOLDER caption — please review
+                src: iftarTitle,
+                alt: 'Annual Interfaith Iftar',
+                caption: 'The Annual Interfaith Iftar at St Olave\'s Grammar School.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: iftarDonutSale,
+                alt: 'Doughnut fundraising sale',
+                caption: 'A doughnut sale that helped raise starting funds for the event.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: iftarHall1,
+                alt: 'The event hall during the Iftar',
+                caption: 'The hall during the Interfaith Iftar.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: iftarHall2,
+                alt: 'The event hall during the Iftar',
+                caption: 'Over 200 guests gathered for the evening.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: iftarHighlights,
+                alt: 'Highlights from the Interfaith Iftar',
+                caption: 'Highlights from the evening.'
+            }
         ],
 
         links: {}

@@ -113,11 +113,11 @@ function Home() {
             </Section>
 
 
-            {/* Credentials */}
+            {/* Certifications, competitions, and awards */}
             <Section
-                id="credentials"
-                eyebrow="03 // CREDENTIALS"
-                title="Certifications and qualifications."
+                id="achievements"
+                eyebrow="03 // CERTIFICATIONS, COMPETITIONS & AWARDS"
+                title="Certifications, competitions, and awards."
             >
                 <div className="card-grid">
                     {credentials.map((item) => (
@@ -129,17 +129,7 @@ function Home() {
                             }
                         />
                     ))}
-                </div>
-            </Section>
 
-
-            {/* Achievements */}
-            <Section
-                id="achievements"
-                eyebrow="04 // ACHIEVEMENTS"
-                title="Competitions and awards."
-            >
-                <div className="card-grid">
                     {achievements.map((item) => (
                         <Card
                             key={item.id}
@@ -156,7 +146,7 @@ function Home() {
             {/* Events */}
             <Section
                 id="events"
-                eyebrow="05 // EVENTS"
+                eyebrow="04 // EVENTS"
                 title="Things I've organised."
             >
                 <div className="card-grid">
@@ -176,7 +166,7 @@ function Home() {
             {/* Contact */}
             <Section
                 id="contact"
-                eyebrow="06 // CONTACT"
+                eyebrow="05 // CONTACT"
                 title="Let's build something."
             >
                 <Paragraphs text={profile.contact} />

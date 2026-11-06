@@ -1,3 +1,6 @@
+import awsHero from '../assets/aws-certification/hero.jpg';
+import awsCertification from '../assets/aws-certification/certification.jpg';
+
 export const credentials = [
 
     {
@@ -11,6 +14,11 @@ export const credentials = [
 
         category: 'Certification',
 
+        heroImage: {
+            src: awsHero,
+            alt: 'AWS Certified Cloud Practitioner'
+        },
+
         description:
             'This certification validates foundational knowledge of cloud computing and AWS services, demonstrating the ability to effectively navigate and utilise AWS cloud solutions.',
 
@@ -20,6 +28,21 @@ export const credentials = [
             'Cloud Security',
             'AWS Services',
             'Cloud Infrastructure'
+        ],
+
+        images: [
+            {
+                // PLACEHOLDER caption — please review
+                src: awsHero,
+                alt: 'AWS Certified Cloud Practitioner',
+                caption: 'My AWS Certified Cloud Practitioner certification.'
+            },
+            {
+                // PLACEHOLDER caption — please review
+                src: awsCertification,
+                alt: 'AWS Certified Cloud Practitioner certificate',
+                caption: 'The AWS Certified Cloud Practitioner certificate.'
+            }
         ],
 
         credentialUrl:
