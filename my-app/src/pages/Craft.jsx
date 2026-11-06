@@ -112,10 +112,8 @@ function Craft() {
             <div className="craft">
                 <p className="craft__intro">
                     Design Engineering is about combining disciplines to
-                    build something new. Mix ingredients in the grid to
-                    discover the projects, experiences and achievements
-                    they create. Order doesn't matter — just find the
-                    right combination.
+                    build something new. Mix ingredients in any order on the grid to
+                    discover my projects, experiences and achievements. Hint: not every slot has to be filled!
                 </p>
 
                 <Inventory onPick={placeIngredient} />
