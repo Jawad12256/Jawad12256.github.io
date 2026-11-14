@@ -13,11 +13,12 @@
 import { useEffect, useRef } from 'react';
 
 // --- TWEAK POINTS -----------------------------------------------------
-const NODE = 32;               // grid spacing (matches CSS background-size)
-const SPARK_COUNT = 4;         // live sparks at once (perf vs liveliness)
-const STEP_MS = 150;           // glide per node (lower = faster/electric)
-const SPARK_LIFETIME_MS = 2000; // max spark life (~2s) before respawn
-const STRAIGHT_BIAS = 0.72;    // chance of continuing straight (longer runs)
+const NODE = 32;                // grid spacing (matches CSS background-size)
+const STEP_MS = 150;            // glide per node (lower = faster/electric)
+const SPAWN_INTERVAL_MS = 600;  // avg time between spawns (randomised ±50%)
+const POOL_SIZE = 10;           // reusable spark elements (soft cap)
+const RUN_H = [2, 4];           // initial run (incl.) for left/right spawns
+const RUN_V = [4, 12];          // initial run (incl.) for top/bottom spawns
 // Band width MUST mirror the CSS: clamp(140px, 22vw, 320px).
 const BAND_MIN = 140;
 const BAND_VW = 0.22;
@@ -36,6 +37,9 @@ const isPointerDevice = () =>
     window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 const randInt = (n) => Math.floor(Math.random() * n);
+// inclusive integer in [min, max]
+const randRange = (min, max) => min + randInt(max - min + 1);
+const pick = (arr) => arr[randInt(arr.length)];
 
 function Background() {
     const sparkRefs = useRef([]);
@@ -66,7 +70,6 @@ function Background() {
         window.addEventListener('resize', onResize);
 
         // Tail angle (deg) so the streak points OPPOSITE the travel dir.
-        // dir is [dc, dr]; the tail points back along -dir.
         const tailAngle = (dc, dr) => {
             if (dc === 1) return 180; // moving right -> tail points left
             if (dc === -1) return 0; // moving left  -> tail points right
@@ -75,135 +78,157 @@ function Background() {
             return 180;
         };
 
-        // Per-spark mutable state.
-        const sparks = sparkRefs.current.map((el, i) => ({
-            el,
-            band: i % 2 === 0 ? 'left' : 'right',
-            col: 0,
-            row: 0,
-            dir: null, // [dc, dr] current travel direction
-            bornAt: 0,
-            timer: null
-        }));
+        // Pool of reusable spark elements + their state.
+        const pool = sparkRefs.current
+            .filter(Boolean)
+            .map((el) => ({
+                el,
+                alive: false,
+                band: 'left',
+                col: 0,
+                row: 0,
+                dir: [1, 0],
+                phase: 'initial',
+                runLeft: 0,
+                timer: null
+            }));
 
-        const pixelX = (spark) => {
-            if (spark.band === 'left') {
-                return spark.col * NODE;
-            }
-            // right band measured inward from the right edge
-            return window.innerWidth - spark.col * NODE;
-        };
+        const pixelX = (spark) =>
+            spark.band === 'left'
+                ? spark.col * NODE
+                : window.innerWidth - spark.col * NODE;
 
         const place = (spark) => {
-            const x = pixelX(spark);
-            const y = spark.row * NODE;
-            spark.el.style.transform = `translate(${x}px, ${y}px)`;
+            spark.el.style.transform = `translate(${pixelX(spark)}px, ${
+                spark.row * NODE
+            }px)`;
         };
 
-        const spawn = (spark) => {
-            spark.col = randInt(cols + 1);
-            spark.row = randInt(rows + 1);
-            spark.dir = null;
-            spark.bornAt = performance.now();
+        const inBounds = (col, row) =>
+            col >= 0 && col <= cols && row >= 0 && row <= rows;
 
-            // Appear STATIONARY: disable the transform transition so the
-            // spark snaps to its spawn node (no fly-in), then fade in.
+        // Spawn a spark on a random band edge, heading inward, then start
+        // its L-shaped path: straight run -> one 90 turn -> run to edge.
+        const spawn = (spark) => {
+            spark.band = pick(['left', 'right']);
+            const edge = pick(['outer', 'inner', 'top', 'bottom']);
+
+            if (edge === 'outer') {
+                spark.col = 0;
+                spark.row = randInt(rows + 1);
+                spark.dir = [1, 0]; // inward (right within band coords)
+                spark.runLeft = randRange(RUN_H[0], RUN_H[1]);
+            } else if (edge === 'inner') {
+                spark.col = cols;
+                spark.row = randInt(rows + 1);
+                spark.dir = [-1, 0]; // inward (toward outer edge)
+                spark.runLeft = randRange(RUN_H[0], RUN_H[1]);
+            } else if (edge === 'top') {
+                spark.col = randInt(cols + 1);
+                spark.row = 0;
+                spark.dir = [0, 1]; // downward into the band
+                spark.runLeft = randRange(RUN_V[0], RUN_V[1]);
+            } else {
+                spark.col = randInt(cols + 1);
+                spark.row = rows;
+                spark.dir = [0, -1]; // upward into the band
+                spark.runLeft = randRange(RUN_V[0], RUN_V[1]);
+            }
+
+            spark.phase = 'initial';
+            spark.alive = true;
+
+            spark.el.style.setProperty('--spark-step', `${STEP_MS}ms`);
+            spark.el.style.setProperty(
+                '--tail-angle',
+                `${tailAngle(spark.dir[0], spark.dir[1])}deg`
+            );
+
+            // Appear STATIONARY at the spawn node (no fly-in), then fade
+            // in; once settled, enable gliding and begin stepping.
             spark.el.style.transition = 'opacity 400ms ease';
             place(spark);
-            // Force reflow so the snapped position is committed before we
-            // restore the transform transition.
             // eslint-disable-next-line no-unused-expressions
-            spark.el.offsetWidth;
+            spark.el.offsetWidth; // commit the snapped position
             window.requestAnimationFrame(() => {
                 spark.el.classList.add('bg-flair__spark--active');
-                // Let the fade-in settle at the node, THEN enable gliding
-                // and start stepping.
                 spark.timer = setTimeout(() => {
                     spark.el.style.transition = '';
                     step(spark);
-                }, 260);
+                }, 220);
             });
         };
 
-        // Pick the next direction: never reverse; bias toward straight.
-        const chooseDir = (spark) => {
-            const inBounds = ([dc, dr]) => {
-                const c = spark.col + dc;
-                const r = spark.row + dr;
-                return c >= 0 && c <= cols && r >= 0 && r <= rows;
-            };
-            const all = [
-                [1, 0],
-                [-1, 0],
-                [0, 1],
-                [0, -1]
-            ];
-
-            if (!spark.dir) {
-                const valid = all.filter(inBounds);
-                return valid[randInt(valid.length)] || null;
-            }
-
-            const [cdc, cdr] = spark.dir;
-            const reverse = [-cdc, -cdr];
-            // candidates: everything except the direct reverse, in bounds
-            const candidates = all.filter(
-                ([dc, dr]) =>
-                    !(dc === reverse[0] && dr === reverse[1]) &&
-                    inBounds([dc, dr])
-            );
-            if (candidates.length === 0) {
-                return null;
-            }
-            // Prefer continuing straight if it's still valid.
-            const straightValid = inBounds(spark.dir);
-            if (straightValid && Math.random() < STRAIGHT_BIAS) {
-                return spark.dir;
-            }
-            // Otherwise a (perpendicular) turn from the candidates.
-            const turns = candidates.filter(
-                ([dc, dr]) => !(dc === cdc && dr === cdr)
-            );
-            const pool = turns.length > 0 ? turns : candidates;
-            return pool[randInt(pool.length)];
+        const die = (spark) => {
+            spark.alive = false;
+            spark.el.classList.remove('bg-flair__spark--active');
+            // element returns to the pool as free once faded out
         };
 
         const step = (spark) => {
-            // Time-based lifespan (~SPARK_LIFETIME_MS).
-            if (performance.now() - spark.bornAt >= SPARK_LIFETIME_MS) {
-                spark.el.classList.remove('bg-flair__spark--active');
-                spark.timer = setTimeout(() => spawn(spark), 450);
+            if (!spark.alive) {
                 return;
             }
 
-            const dir = chooseDir(spark);
-            if (dir) {
-                spark.dir = dir;
-                spark.col += dir[0];
-                spark.row += dir[1];
+            // End of the initial inward run: make ONE 90 degree turn.
+            if (spark.phase === 'initial' && spark.runLeft <= 0) {
+                const [dc] = spark.dir;
+                // perpendicular to current axis
+                spark.dir =
+                    dc !== 0
+                        ? pick([
+                              [0, 1],
+                              [0, -1]
+                          ])
+                        : pick([
+                              [1, 0],
+                              [-1, 0]
+                          ]);
+                spark.phase = 'post-turn';
                 spark.el.style.setProperty(
                     '--tail-angle',
-                    `${tailAngle(dir[0], dir[1])}deg`
+                    `${tailAngle(spark.dir[0], spark.dir[1])}deg`
                 );
-                place(spark);
             }
+
+            const nextCol = spark.col + spark.dir[0];
+            const nextRow = spark.row + spark.dir[1];
+
+            if (!inBounds(nextCol, nextRow)) {
+                die(spark); // reached an edge -> fade out and free
+                return;
+            }
+
+            spark.col = nextCol;
+            spark.row = nextRow;
+            if (spark.phase === 'initial') {
+                spark.runLeft -= 1;
+            }
+            place(spark);
 
             spark.timer = setTimeout(() => step(spark), STEP_MS);
         };
 
-        sparks.forEach((spark, i) => {
-            // Set the per-spark step duration for the CSS transition.
-            spark.el.style.setProperty('--spark-step', `${STEP_MS}ms`);
-            // Stagger starts slightly so they don't move in lockstep.
-            spark.timer = setTimeout(
-                () => spawn(spark),
-                i * 250 + randInt(250)
-            );
-        });
+        // Timer-driven spawner: grab a free pooled element each tick.
+        let spawnTimer = null;
+        const scheduleSpawn = () => {
+            const jitter = 0.5 + Math.random(); // 0.5x .. 1.5x
+            spawnTimer = setTimeout(() => {
+                const free = pool.find((s) => !s.alive);
+                if (free) {
+                    spawn(free);
+                }
+                scheduleSpawn();
+            }, SPAWN_INTERVAL_MS * jitter);
+        };
+        scheduleSpawn();
 
         return () => {
             window.removeEventListener('resize', onResize);
-            sparks.forEach((s) => s.timer && clearTimeout(s.timer));
+            if (spawnTimer) {
+                clearTimeout(spawnTimer);
+            }
+            pool.forEach((s) => s.timer && clearTimeout(s.timer));
         };
     }, []);
 
@@ -249,7 +274,7 @@ function Background() {
         };
     }, []);
 
-    const sparks = Array.from({ length: SPARK_COUNT });
+    const sparks = Array.from({ length: POOL_SIZE });
 
     return (
         <div className="bg-flair" aria-hidden="true">
