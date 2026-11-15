@@ -149,9 +149,11 @@
         rgba(62, 232, 168, 0)
     );
 
-    transform-origin: left center;
-    /* rotate to point opposite travel; extend backwards from the spark */
-    transform: rotate(var(--tail-angle, 0deg)) translateX(-100%);
+    /* Anchor the bright (right) end at the spark centre and extend the
+       bar to the LEFT, then rotate about that anchor by --tail-angle so
+       the bar always trails BEHIND the spark for any travel direction. */
+    transform-origin: right center;
+    transform: translate(-100%, -50%) rotate(var(--tail-angle, 0deg));
 
     pointer-events: none;
 }

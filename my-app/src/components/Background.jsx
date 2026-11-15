@@ -15,10 +15,11 @@ import { useEffect, useRef } from 'react';
 // --- TWEAK POINTS -----------------------------------------------------
 const NODE = 32;                // grid spacing (matches CSS background-size)
 const STEP_MS = 150;            // glide per node (lower = faster/electric)
-const SPAWN_INTERVAL_MS = 600;  // avg time between spawns (randomised ±50%)
+const SPAWN_INTERVAL_MS = 850;  // avg time between spawns (randomised ±50%)
 const POOL_SIZE = 10;           // reusable spark elements (soft cap)
 const RUN_H = [2, 4];           // initial run (incl.) for left/right spawns
 const RUN_V = [4, 12];          // initial run (incl.) for top/bottom spawns
+const CORNER_MARGIN = 1;        // cells excluded from each END of a spawn edge
 // Band width MUST mirror the CSS: clamp(140px, 22vw, 320px).
 const BAND_MIN = 140;
 const BAND_VW = 0.22;
@@ -40,6 +41,15 @@ const randInt = (n) => Math.floor(Math.random() * n);
 // inclusive integer in [min, max]
 const randRange = (min, max) => min + randInt(max - min + 1);
 const pick = (arr) => arr[randInt(arr.length)];
+
+// Random index along an edge of length n (nodes 0..n), excluding the
+// first and last CORNER_MARGIN cells so sparks never spawn at/near a
+// corner. Clamps gracefully so there's always >= 1 valid position.
+const edgePos = (n) => {
+    const lo = Math.min(CORNER_MARGIN, Math.floor(n / 2));
+    const hi = Math.max(lo, n - CORNER_MARGIN);
+    return lo + randInt(hi - lo + 1);
+};
 
 function Background() {
     const sparkRefs = useRef([]);
@@ -69,13 +79,15 @@ function Background() {
         };
         window.addEventListener('resize', onResize);
 
-        // Tail angle (deg) so the streak points OPPOSITE the travel dir.
+        // Tail angle (deg) so the streak trails BEHIND the spark. The
+        // bar rests pointing LEFT (bright end at the spark); CSS rotate
+        // is clockwise, so: left=0, up=90, right=180, down=270.
         const tailAngle = (dc, dr) => {
-            if (dc === 1) return 180; // moving right -> tail points left
-            if (dc === -1) return 0; // moving left  -> tail points right
-            if (dr === 1) return 270; // moving down  -> tail points up
-            if (dr === -1) return 90; // moving up    -> tail points down
-            return 180;
+            if (dc === 1) return 0; // moving right -> tail points left
+            if (dc === -1) return 180; // moving left  -> tail points right
+            if (dr === 1) return 90; // moving down  -> tail points up
+            if (dr === -1) return 270; // moving up    -> tail points down
+            return 0;
         };
 
         // Pool of reusable spark elements + their state.
@@ -115,21 +127,21 @@ function Background() {
 
             if (edge === 'outer') {
                 spark.col = 0;
-                spark.row = randInt(rows + 1);
+                spark.row = edgePos(rows);
                 spark.dir = [1, 0]; // inward (right within band coords)
                 spark.runLeft = randRange(RUN_H[0], RUN_H[1]);
             } else if (edge === 'inner') {
                 spark.col = cols;
-                spark.row = randInt(rows + 1);
+                spark.row = edgePos(rows);
                 spark.dir = [-1, 0]; // inward (toward outer edge)
                 spark.runLeft = randRange(RUN_H[0], RUN_H[1]);
             } else if (edge === 'top') {
-                spark.col = randInt(cols + 1);
+                spark.col = edgePos(cols);
                 spark.row = 0;
                 spark.dir = [0, 1]; // downward into the band
                 spark.runLeft = randRange(RUN_V[0], RUN_V[1]);
             } else {
-                spark.col = randInt(cols + 1);
+                spark.col = edgePos(cols);
                 spark.row = rows;
                 spark.dir = [0, -1]; // upward into the band
                 spark.runLeft = randRange(RUN_V[0], RUN_V[1]);
