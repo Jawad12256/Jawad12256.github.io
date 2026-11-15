@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { toParagraphs } from '../utils/paragraphs';
 
 // TWEAK: characters above which a collapsible block starts collapsed.
-const COLLAPSE_THRESHOLD = 320;
+const COLLAPSE_THRESHOLD = 120;
 
 function Paragraphs({ text, className, collapsible = false }) {
     const paragraphs = toParagraphs(text);

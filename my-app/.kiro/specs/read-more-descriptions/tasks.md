@@ -7,7 +7,7 @@ each task. Stage explicitly; `git add` then `git commit` separately.
 
 - [ ] 1. Add collapsible mode to Paragraphs
   - `Paragraphs.jsx`: add `collapsible` prop (default false) + a labelled
-    `COLLAPSE_THRESHOLD` (~320 chars). When collapsible AND total text >
+    `COLLAPSE_THRESHOLD` (~120 chars). When collapsible AND total text >
     threshold: show whole paragraphs up to the threshold, then a mint
     "Read more…" `<button>` that toggles to full / "Show less"
     (`aria-expanded`). Default-off path behaves exactly as today.

@@ -14,7 +14,7 @@ hero intro and contact blurb do not, so they're unchanged.
 import { useState } from 'react';
 import { toParagraphs } from '../utils/paragraphs';
 
-const COLLAPSE_THRESHOLD = 320; // chars; above this, collapse by default
+const COLLAPSE_THRESHOLD = 120; // chars; above this, collapse by default
 
 function Paragraphs({ text, className, collapsible = false }) {
     const paragraphs = toParagraphs(text);
