@@ -85,6 +85,7 @@ function SubItem({ item }) {
             <Paragraphs
                 text={item.description}
                 className="modal__subitem-desc"
+                collapsible
             />
             <Chips label="Technologies" items={item.technologies} />
             <Chips label="Skills" items={item.skills} />
@@ -253,6 +254,7 @@ function ContentModal({ item, onClose }) {
                         <Paragraphs
                             text={item.description}
                             className="modal__description"
+                            collapsible
                         />
 
                         <Chips
