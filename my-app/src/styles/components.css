@@ -613,6 +613,36 @@ main > .section:first-child {
     color: var(--text-body);
 }
 
+/* Inline mint "Read more…" / "Show less" toggle for long descriptions */
+.read-more {
+    display: inline;
+    margin-top: var(--space-2);
+
+    padding: 0;
+    background: none;
+    border: none;
+
+    color: var(--accent);
+    font: inherit;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: color 150ms ease;
+}
+
+.read-more:hover,
+.read-more:focus-visible {
+    color: var(--accent-hover);
+    text-decoration: underline;
+    outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .read-more {
+        transition: none;
+    }
+}
+
 /* Space after the last description paragraph, before chips/sub-items */
 .modal__description:last-of-type {
     margin-bottom: var(--space-6);
